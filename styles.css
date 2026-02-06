@@ -120,10 +120,15 @@ main {
 }
 
 .cards {
-  width: 100%;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
   gap: 12px;
+  justify-content: center;
+}
+
+.card {
+  flex: 1 1 calc(50% - 12px); /* 50% da largura do container menos o gap */
+  min-width: 140px; /* garante que não fique muito pequeno */
 }
 
 .card {
