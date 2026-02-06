@@ -12,24 +12,19 @@ function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
 // ==========================
-// ANIMAÇÃO AO ENTRAR NA TELA (IntersectionObserver)
+// ANIMAÇÃO AO ENTRAR NA TELA
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
-  const animatedElements = document.querySelectorAll(".card, .timeline-item, .section-title");
+  const elements = document.querySelectorAll(".card, .timeline-item, .section-title");
 
-  animatedElements.forEach((el, i) => {
-    // delay de cascata
-    el.style.transitionDelay = `${i * 0.15}s`;
-  });
-
-  const observer = new IntersectionObserver((entries, observer) => {
+  const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
-        entry.target.classList.add("active"); // ativa animação
-        observer.unobserve(entry.target);
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
       }
     });
   }, { threshold: 0.15 });
 
-  animatedElements.forEach(el => observer.observe(el));
+  elements.forEach(el => observer.observe(el));
 });
