@@ -187,14 +187,12 @@ main {
   .card { padding: 16px 16px; }
   .card-icon { width: 46px; height: 46px; }
 }
-/* ...mantemos todo o CSS anterior... */
-
 /* =====================
    ANIMAÇÕES DE ENTRADA
 ===================== */
 .card, .timeline-item {
   opacity: 0;
-  transform: translateX(-50px); /* default esquerda */
+  transform: translateX(-50px); /* default entrada da esquerda */
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
@@ -206,7 +204,19 @@ main {
   transform: translateX(-50px); /* timeline sempre da esquerda */
 }
 
+/* Ativa quando entrar na tela */
 .card.active, .timeline-item.active {
   opacity: 1;
   transform: translateX(0);
+}
+
+/* Hero já flutua suavemente */
+.avatar {
+  animation: float 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes float {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-12px) translateX(4px); }
+  100% { transform: translateY(0px); }
 }
