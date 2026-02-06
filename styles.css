@@ -279,5 +279,22 @@ main {
 }
 
 
+@media (max-width: 480px) {
+  .avatar {
+    width: 120px;
+    max-width: 40vw;
+  }
 
-*CSS lian*
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .subtitle {
+    font-size: 0.9rem;
+  }
+
+  .bio-list li {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
