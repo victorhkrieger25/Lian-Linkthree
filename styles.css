@@ -50,6 +50,23 @@ body::before {
   z-index: 0;
 }
 
+body::after {
+  content: "";
+  position: fixed;
+  inset: -20%;
+  background:
+    radial-gradient(circle at center, rgba(124,58,237,0.12), transparent 60%);
+  animation: glowMove 18s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes glowMove {
+  0%   { transform: translate(-10%, -10%) rotate(0deg); }
+  50%  { transform: translate(10%, 10%) rotate(180deg); }
+  100% { transform: translate(-10%, -10%) rotate(360deg); }
+}
+
 /* =====================
    MAIN
 ===================== */
