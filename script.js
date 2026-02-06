@@ -1,9 +1,7 @@
-// ==========================
-// LENIS SMOOTH SCROLL
-// ==========================
+// 1. Inicialização do Lenis (Smooth Scroll)
 const lenis = new Lenis({
   duration: 1.2,
-  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
   smoothWheel: true,
   smoothTouch: true
 });
@@ -14,30 +12,35 @@ function raf(time) {
 }
 requestAnimationFrame(raf);
 
-// ==========================
-// FADE + SLIDE AO SCROLL
-// ==========================
+// 2. Lógica de Animação ao Scroll
 document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".card");
   const timelineItems = document.querySelectorAll(".timeline-item");
-  const heroElements = document.querySelectorAll(".hero img, .hero .title, .hero .subtitle, .bio-list, .scroll-hint");
+  const heroElements = document.querySelectorAll(".hero > *, .bio-list li");
 
-  // Classes iniciais para animação
-  cards.forEach((card, i) => card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right"));
+  // Adiciona as classes de animação iniciais
   heroElements.forEach(el => el.classList.add("fade-slide"));
-  timelineItems.forEach(item => item.classList.add("fade-slide"));
+  
+  cards.forEach((card, i) => {
+    card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
+  });
 
-  // IntersectionObserver
-  const observer = new IntersectionObserver((entries, obs) => {
+  // O Observer que detecta quando o elemento aparece na tela
+  const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         entry.target.classList.add("active");
-        obs.unobserve(entry.target);
+        // Opcional: parar de observar após animar
+        // observer.unobserve(entry.target); 
       }
     });
-  }, { threshold: 0.2 });
+  }, { 
+    threshold: 0.15, // Ativa quando 15% do item aparece
+    rootMargin: "0px 0px -50px 0px" 
+  });
 
-  // Observa todos os elementos animáveis
-  document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item")
-          .forEach(el => observer.observe(el));
+  // Seleciona todos os itens que devem ser observados
+  const elementsToAnimate = document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item");
+  
+  elementsToAnimate.forEach(el => observer.observe(el));
 });
