@@ -192,25 +192,25 @@ main {
 ===================== */
 .card, .timeline-item {
   opacity: 0;
-  transform: translateX(-50px); /* default entrada da esquerda */
+  transform: translateX(-60px); /* entrada esquerda por padrão */
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
 .card:nth-child(even) {
-  transform: translateX(50px); /* alterna direita */
+  transform: translateX(60px); /* alterna direita */
 }
 
 .timeline-item {
-  transform: translateX(-50px); /* timeline sempre da esquerda */
+  transform: translateX(-60px); /* timeline sempre da esquerda */
 }
 
-/* Ativa quando entrar na tela */
+/* Quando estiver visível */
 .card.active, .timeline-item.active {
   opacity: 1;
   transform: translateX(0);
 }
 
-/* Hero já flutua suavemente */
+/* Hero flutuante */
 .avatar {
   animation: float 3.5s ease-in-out infinite alternate;
 }
@@ -219,4 +219,5 @@ main {
   0%   { transform: translateY(0px); }
   50%  { transform: translateY(-12px) translateX(4px); }
   100% { transform: translateY(0px); }
+}% { transform: translateY(0px); }
 }
