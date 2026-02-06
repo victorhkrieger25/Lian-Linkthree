@@ -41,3 +41,42 @@ document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right")
           .forEach(el => observer.observe(el));
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // LENIS SMOOTH SCROLL
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    smoothTouch: true
+  });
+  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+
+  // ELEMENTOS PARA ANIMAÇÃO
+  const cards = document.querySelectorAll(".card");
+  const timelineItems = document.querySelectorAll(".timeline-item");
+  const heroElements = document.querySelectorAll(".hero img, .hero .title, .hero .subtitle, .bio-list, .scroll-hint");
+
+  // CLASSES INICIAIS PARA CARDS
+  cards.forEach((card, i) => {
+    card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
+  });
+
+  heroElements.forEach(el => el.classList.add("fade-slide"));
+
+  // OBSERVER
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  // OBSERVAR TODOS
+  document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item")
+          .forEach(el => observer.observe(el));
+});
+
