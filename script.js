@@ -91,3 +91,45 @@ cards.forEach(card => {
     card.style.transform = "translateY(0) scale(1)";
   });
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+  // ANIMAÇÃO HERO
+  const heroAvatar = document.querySelector(".avatar");
+  if(heroAvatar) heroAvatar.classList.add("hero-avatar-float");
+
+  // ELEMENTOS PARA ANIMAÇÃO
+  const animatedElements = document.querySelectorAll(
+    ".section-title, .card, .timeline-item"
+  );
+
+  animatedElements.forEach((el, i) => {
+    // cards alternam direção
+    if(el.classList.contains("card")) {
+      if(i % 2 === 0) el.classList.add("pre-animate-left");
+      else el.classList.add("pre-animate-right");
+    } else {
+      el.classList.add("pre-animate");
+    }
+  });
+
+  // OBSERVER PARA DISPARAR ANIMAÇÕES AO SCROLL
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          if(entry.target.classList.contains("pre-animate-left"))
+            entry.target.classList.add("animate-left");
+          else if(entry.target.classList.contains("pre-animate-right"))
+            entry.target.classList.add("animate-right");
+          else
+            entry.target.classList.add("animate");
+
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.15 }
+  );
+
+  animatedElements.forEach(el => observer.observe(el));
+});
