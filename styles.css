@@ -320,4 +320,56 @@ main {
     transform 0.8s ease;
   will-change: transform, opacity;
 }
+/* =====================
+   ANIMAÇÕES INICIAIS
+===================== */
 
+.pre-animate {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+.pre-animate-left {
+  opacity: 0;
+  transform: translateX(-50px);
+}
+
+.pre-animate-right {
+  opacity: 0;
+  transform: translateX(50px);
+}
+
+.animate {
+  opacity: 1 !important;
+  transform: translate(0,0) !important;
+}
+
+.hero-avatar-float {
+  animation: float 3.5s ease-in-out infinite alternate;
+}
+
+/* cards entram da lateral */
+.card.animate-left {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.card.animate-right {
+  transform: translateX(0) !important;
+  opacity: 1 !important;
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+/* Hero flutuação */
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-12px) translateX(4px); }
+  100% { transform: translateY(0px); }
+}
+
+/* Transição suave para títulos, cards, timeline */
+.hero *, .section-title, .card, .timeline-item {
+  transition: opacity 0.8s ease, transform 0.8s ease;
+  will-change: transform, opacity;
+}
