@@ -134,54 +134,35 @@ main {
 /* =====================
    CARDS
 ===================== */
-.cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  width: 100%;
-}
-
 .card {
-  display: flex;
+  flex-direction: row;
   align-items: center;
-  gap: 16px;
-  padding: 16px 18px;
+  gap: 14px;
+  padding: 16px;
   min-height: 78px;
   width: 100%;
   text-decoration: none;
   color: #fff;
-
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255,255,255,0.08);
   backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
-
   border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
-
-  /* GLOW MAIOR */
+  border: 1px solid rgba(255,255,255,0.18);
   box-shadow:
-    0 6px 18px rgba(0, 0, 0, 0.45),
-    0 0 14px rgba(124, 58, 237, 0.35),
-    0 0 28px rgba(124, 58, 237, 0.2);
-
-  /* ANIMAÇÃO */
+    0 6px 18px rgba(0,0,0,0.45),
+    0 0 14px rgba(124,58,237,0.35),
+    0 0 28px rgba(124,58,237,0.2);
   animation: pulseGlow 3.5s ease-in-out infinite;
-
-  transition:
-    transform 0.25s ease,
-    background 0.25s ease,
-    box-shadow 0.25s ease;
+  transition: transform 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.14);
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.14);
   box-shadow:
-    0 10px 26px rgba(0, 0, 0, 0.55),
-    0 0 14px rgba(124, 58, 237, 0.45);
+    0 10px 26px rgba(0,0,0,0.55),
+    0 0 18px rgba(124,58,237,0.45);
 }
 
-/* Feedback de toque (mobile) */
 .card:active {
   transform: scale(0.98);
 }
