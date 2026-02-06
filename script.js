@@ -1,50 +1,43 @@
-// ================================
-// SCROLL SUAVE (fallback)
-// ================================
-document.documentElement.style.scrollBehavior = "smooth";
-
-
-// ================================
-// REVEAL SIMPLES (SEM EXAGERO)
-// ================================
-const elements = document.querySelectorAll(
-  '.hero, .section-title, .card, .timeline-item'
-);
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('animate');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.2 });
-
-elements.forEach(el => {
-  el.classList.add('pre-animate');
-  observer.observe(el);
+// ==========================
+// LENIS SMOOTH SCROLL
+// ==========================
+const lenis = new Lenis({
+  duration: 1.2,
+  easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+  smoothWheel: true,
+  smoothTouch: true
 });
 
+function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+requestAnimationFrame(raf);
 
-// ================================
-// TIMELINE LINE (PROGRESSO)
-// ================================
-const timeline = document.querySelector('.timeline');
-const line = document.querySelector('.timeline-line');
+// ==========================
+// FADE + SLIDE AO SCROLL
+// ==========================
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".card");
+  const timelineItems = document.querySelectorAll(".timeline-item");
+  const heroElements = document.querySelectorAll(".hero img, .hero .title, .hero .subtitle, .bio-list, .scroll-hint");
 
-function updateLine() {
-  if (!timeline || !line) return;
+  // Classes iniciais
+  cards.forEach((card, i) => {
+    card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
+  });
 
-  const rect = timeline.getBoundingClientRect();
-  const h = window.innerHeight;
+  timelineItems.forEach(item => item.classList.add("fade-slide"));
+  heroElements.forEach(el => el.classList.add("fade-slide"));
 
-  const progress = Math.min(
-    Math.max((h - rect.top) / (rect.height + h), 0),
-    1
-  );
+  // Observer
+  const observer = new IntersectionObserver((entries, obs) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting){
+        entry.target.classList.add("active");
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
 
-  line.style.height = `${progress * 100}%`;
-}
-
-window.addEventListener('scroll', updateLine);
-updateLine();
+  // Observar todos
+  document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right")
+          .forEach(el => observer.observe(el));
+});
