@@ -1,30 +1,29 @@
 // =====================================================
-// SMOOTH SCROLL (fallback)
+// SMOOTH SCROLL
 // =====================================================
 document.documentElement.style.scrollBehavior = "smooth";
 
 
 // =====================================================
-// REVEAL ANIMATIONS (GLOBAL)
+// REVEAL SYSTEM (SIMPLES E LIMPO)
 // =====================================================
-const revealElements = document.querySelectorAll(
-  '.hero, .card, .section-title, .timeline-item'
+const elements = document.querySelectorAll(
+  '.hero, .section-title, .card, .timeline-item'
 );
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((entry, index) => {
     if (entry.isIntersecting) {
+      entry.target.style.transitionDelay = `${index * 80}ms`;
       entry.target.classList.add('active');
-      revealObserver.unobserve(entry.target);
+      observer.unobserve(entry.target);
     }
   });
-}, {
-  threshold: 0.15
-});
+}, { threshold: 0.2 });
 
-revealElements.forEach(el => {
+elements.forEach(el => {
   el.classList.add('pre-animate');
-  revealObserver.observe(el);
+  observer.observe(el);
 });
 
 
@@ -32,49 +31,21 @@ revealElements.forEach(el => {
 // TIMELINE LINE PROGRESS
 // =====================================================
 const timeline = document.querySelector('.timeline');
-const timelineLine = document.querySelector('.timeline-line');
+const line = document.querySelector('.timeline-line');
 
-function updateTimelineLine() {
-  if (!timeline || !timelineLine) return;
+function updateLine() {
+  if (!timeline || !line) return;
 
   const rect = timeline.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+  const h = window.innerHeight;
 
   const progress = Math.min(
-    Math.max((windowHeight - rect.top) / (rect.height + windowHeight), 0),
+    Math.max((h - rect.top) / (rect.height + h), 0),
     1
   );
 
-  timelineLine.style.height = `${progress * 100}%`;
+  line.style.height = `${progress * 100}%`;
 }
 
-window.addEventListener('scroll', updateTimelineLine);
-updateTimelineLine();
-
-
-// =====================================================
-// CARD HOVER DEPTH (DESKTOP ONLY)
-// =====================================================
-if (window.innerWidth > 1024) {
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('mousemove', e => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-
-      const rotateX = ((y / rect.height) - 0.5) * 4;
-      const rotateY = ((x / rect.width) - 0.5) * -4;
-
-      card.style.transform = `
-        perspective(600px)
-        rotateX(${rotateX}deg)
-        rotateY(${rotateY}deg)
-        translateY(-6px)
-      `;
-    });
-
-    card.addEventListener('mouseleave', () => {
-      card.style.transform = '';
-    });
-  });
-}
+window.addEventListener('scroll', updateLine);
+updateLine();
