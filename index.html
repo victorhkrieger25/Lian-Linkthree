@@ -158,5 +158,60 @@
 
     requestAnimationFrame(raf);
   </script>
+  <script>
+  const stages = [
+    {
+      year: "2023",
+      progress: 25,
+      text: "Começo da fase mais séria. Ajustes de treino e mentalidade."
+    },
+    {
+      year: "2024",
+      progress: 50,
+      text: "Constância total. Shape começou a responder de verdade."
+    },
+    {
+      year: "2025",
+      progress: 75,
+      text: "Volume, maturidade muscular e foco absoluto."
+    },
+    {
+      year: "2026",
+      progress: 100,
+      text: "Versão mais forte até agora. Disciplina virou estilo de vida."
+    }
+  ];
+
+  let index = 0;
+
+  const yearEl = document.getElementById("year");
+  const progressEl = document.getElementById("progress");
+  const textEl = document.getElementById("evoText");
+
+  function updateStage(i) {
+    yearEl.style.opacity = 0;
+    textEl.style.opacity = 0;
+
+    setTimeout(() => {
+      yearEl.textContent = stages[i].year;
+      progressEl.style.width = stages[i].progress + "%";
+      textEl.textContent = stages[i].text;
+
+      yearEl.style.opacity = 1;
+      textEl.style.opacity = 1;
+    }, 200);
+  }
+
+  window.addEventListener("wheel", (e) => {
+    if (e.deltaY > 0 && index < stages.length - 1) {
+      index++;
+      updateStage(index);
+    } else if (e.deltaY < 0 && index > 0) {
+      index--;
+      updateStage(index);
+    }
+  });
+</script>
+  
 </body>
 </html>
