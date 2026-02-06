@@ -12,15 +12,20 @@ function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
 requestAnimationFrame(raf);
 
 // ==========================
-// ANIMAÇÃO AO ENTRAR NA TELA
+// ANIMAÇÃO AO ENTRAR NA TELA (IntersectionObserver)
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
   const animatedElements = document.querySelectorAll(".card, .timeline-item, .section-title");
 
+  animatedElements.forEach((el, i) => {
+    // aplica delay para cascata
+    el.style.transitionDelay = `${i * 0.15}s`;
+  });
+
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
-        entry.target.classList.add("active"); // ativa CSS
+        entry.target.classList.add("active"); // CSS cuida da animação
         observer.unobserve(entry.target);
       }
     });
