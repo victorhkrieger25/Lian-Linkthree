@@ -1,35 +1,45 @@
+// 1. Smooth Scroll (Lenis)
 const lenis = new Lenis({
-  duration: 1.2,
-  easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-  smoothWheel: true,
-  smoothTouch: true
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true
 });
 
 function raf(time) {
-  lenis.raf(time);
-  requestAnimationFrame(raf);
+    lenis.raf(time);
+    requestAnimationFrame(raf);
 }
 requestAnimationFrame(raf);
 
+// 2. Sistema de Animação
 document.addEventListener("DOMContentLoaded", () => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("active");
-      }
+    // Seleciona os grupos
+    const cards = document.querySelectorAll(".card");
+    const timelineItems = document.querySelectorAll(".timeline-item");
+    const heroElements = document.querySelectorAll(".hero > *, .bio-list li");
+
+    // Aplica os estados iniciais via JS (caso o CSS falhe, o JS garante)
+    heroElements.forEach(el => el.classList.add("fade-slide"));
+    cards.forEach((card, i) => {
+        card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
     });
-  }, { threshold: 0.1 });
 
-  // Seleciona todos os itens da timeline para observar
-  document.querySelectorAll('.timeline-item').forEach(item => {
-    observer.observe(item);
-  });
+    // Configura o Observador
+    const appearanceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("active");
+            }
+        });
+    }, {
+        threshold: 0.1, // Ativa quando 10% do item aparece
+        rootMargin: "0px 0px -50px 0px" // Ativa um pouco antes de chegar na visão total
+    });
 
-  // Também observa os cards e o hero
-  document.querySelectorAll('.card, .hero > *').forEach((el, i) => {
-    if (!el.classList.contains('fade-slide-left') && !el.classList.contains('fade-slide-right')) {
-        el.classList.add('fade-slide');
-    }
-    observer.observe(el);
-  });
+    // Coloca todos para serem observados
+    const allAnimatables = document.querySelectorAll('.fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item');
+    
+    allAnimatables.forEach(el => {
+        appearanceObserver.observe(el);
+    });
 });
