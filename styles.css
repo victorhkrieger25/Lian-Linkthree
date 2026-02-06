@@ -187,3 +187,26 @@ main {
   .card { padding: 16px 16px; }
   .card-icon { width: 46px; height: 46px; }
 }
+/* ...mantemos todo o CSS anterior... */
+
+/* =====================
+   ANIMAÇÕES DE ENTRADA
+===================== */
+.card, .timeline-item {
+  opacity: 0;
+  transform: translateX(-50px); /* default esquerda */
+  transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.card:nth-child(even) {
+  transform: translateX(50px); /* alterna direita */
+}
+
+.timeline-item {
+  transform: translateX(-50px); /* timeline sempre da esquerda */
+}
+
+.card.active, .timeline-item.active {
+  opacity: 1;
+  transform: translateX(0);
+}
