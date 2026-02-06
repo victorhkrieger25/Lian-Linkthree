@@ -18,14 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {
   const animatedElements = document.querySelectorAll(".card, .timeline-item, .section-title");
 
   animatedElements.forEach((el, i) => {
-    // aplica delay para cascata
+    // delay de cascata
     el.style.transitionDelay = `${i * 0.15}s`;
   });
 
   const observer = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
-        entry.target.classList.add("active"); // CSS cuida da animação
+        entry.target.classList.add("active"); // ativa animação
         observer.unobserve(entry.target);
       }
     });
