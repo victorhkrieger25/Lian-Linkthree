@@ -127,6 +127,8 @@ main {
 }
 
 .card {
+  flex: 1 1 calc(50% - 12px); /* 50% da largura do container menos o gap */
+  min-width: 140px;
   position: relative;
   display: flex;
   align-items: center;
