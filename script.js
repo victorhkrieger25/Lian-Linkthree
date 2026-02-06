@@ -1,98 +1,93 @@
-/* ==========================
-   SCROLL ANIMATIONS
-========================== */
+// =====================================
+// FADE + SLIDE ANIMATION (Intersection)
+// =====================================
 
-// Seleciona todos os elementos animáveis
-const animatedElements = document.querySelectorAll(
-  '.card, .timeline-item, .hero, .section-title'
-);
+document.addEventListener("DOMContentLoaded", () => {
+  const animatedElements = document.querySelectorAll(`
+    .hero *,
+    .section-title,
+    .card,
+    .timeline-item
+  `);
 
-const observer = new IntersectionObserver(
-  (entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('animate');
-        observer.unobserve(entry.target);
-      }
-    });
-  },
-  {
-    threshold: 0.15
-  }
-);
+  // Estado inicial
+  animatedElements.forEach(el => {
+    el.style.opacity = "0";
+    el.style.transform = "translateY(30px)";
+    el.style.transition = "opacity 0.8s ease, transform 0.8s ease";
+  });
 
-// Aplica animação inicial
-animatedElements.forEach((el) => {
-  el.classList.add('pre-animate');
-  observer.observe(el);
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = "1";
+          entry.target.style.transform = "translateY(0)";
+          entry.target.style.transitionDelay = `${index * 0.05}s`;
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.15
+    }
+  );
+
+  animatedElements.forEach(el => observer.observe(el));
 });
 
-/* ==========================
-   TIMELINE LINE ANIMATION
-========================== */
 
-const timeline = document.querySelector('.timeline');
-const timelineLine = document.querySelector('.timeline-line');
+// =====================================
+// CARDS — ANIMAÇÃO EM CASCATA
+// =====================================
 
-function animateTimeline() {
+const cards = document.querySelectorAll(".card");
+
+cards.forEach((card, index) => {
+  card.style.transitionDelay = `${index * 0.08}s`;
+});
+
+
+// =====================================
+// TIMELINE LINE — ANIMAÇÃO DE CRESCIMENTO
+// =====================================
+
+const timeline = document.querySelector(".timeline");
+const timelineLine = document.querySelector(".timeline-line");
+
+function animateTimelineLine() {
   if (!timeline || !timelineLine) return;
 
   const rect = timeline.getBoundingClientRect();
   const windowHeight = window.innerHeight;
 
-  const progress = Math.min(
-    Math.max((windowHeight - rect.top) / (rect.height + windowHeight), 0),
-    1
-  );
+  if (rect.top < windowHeight) {
+    const progress = Math.min(
+      (windowHeight - rect.top) / (rect.height + windowHeight),
+      1
+    );
 
-  timelineLine.style.height = `${progress * 100}%`;
+    timelineLine.style.height = `${progress * 100}%`;
+  }
 }
 
-window.addEventListener('scroll', animateTimeline);
-animateTimeline();
+timelineLine.style.height = "0%";
+timelineLine.style.transition = "height 1.2s ease";
 
-/* ==========================
-   CARD DEPTH EFFECT (mouse)
-========================== */
+window.addEventListener("scroll", animateTimelineLine);
+animateTimelineLine();
 
-const cards = document.querySelectorAll('.card');
 
-cards.forEach((card) => {
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+// =====================================
+// HOVER SUAVE NOS CARDS (desktop)
+// =====================================
 
-    const rotateX = ((y / rect.height) - 0.5) * 6;
-    const rotateY = ((x / rect.width) - 0.5) * -6;
-
-    card.style.transform = `
-      perspective(600px)
-      rotateX(${rotateX}deg)
-      rotateY(${rotateY}deg)
-      translateY(-6px)
-    `;
+cards.forEach(card => {
+  card.addEventListener("mouseenter", () => {
+    card.style.transform = "translateY(-8px) scale(1.02)";
   });
 
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = '';
+  card.addEventListener("mouseleave", () => {
+    card.style.transform = "translateY(0) scale(1)";
   });
-});
-
-/* ==========================
-   SMOOTH SCROLL FEEL
-========================== */
-
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-  const diff = currentScroll - lastScroll;
-
-  document.documentElement.style.setProperty(
-    '--scroll-speed',
-    Math.min(Math.abs(diff), 40)
-  );
-
-  lastScroll = currentScroll;
 });
