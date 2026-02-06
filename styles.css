@@ -296,3 +296,28 @@ main {
   .card { padding: 16px 16px; }
   .card-icon { width: 46px; height: 46px; }
 }
+/* =====================
+   SCROLL ANIMATIONS
+===================== */
+
+.animate {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+.pre-animate {
+  opacity: 0;
+  transform: translateY(32px);
+}
+
+/* Transição padrão suave */
+.hero *,
+.section-title,
+.card,
+.timeline-item {
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
+  will-change: transform, opacity;
+}
+
