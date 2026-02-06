@@ -1,4 +1,4 @@
-
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -7,114 +7,105 @@
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <main>
-    <!-- HERO -->
-    <section class="hero">
-      <img src="img/lian.jpg" alt="Lian Avatar" class="avatar animate-slide-in" />
-      <h1 class="title animate-slide-in">Oii, eu sou o Lian.</h1>
-      <p class="subtitle animate-slide-in">Streamer Otaku &amp; Fitness Enthusiast 👾💪🍥</p>
-      <ul class="bio-list animate-slide-in">
-        <li>Lifestyle 🌱</li>
-        <li>Dicas 📚</li>
-        <li>Humor 😅</li>
-        <li>Motivação 💪</li>
-      </ul>
-      <p class="scroll-hint animate-bounce">⬇ Arraste ou role para ver meus links</p>
-    </section>
 
-    <!-- CUPONS -->
-    <section class="cards-section">
-      <h2 class="section-title">💎 Cupons Exclusivos</h2>
-      <div class="cards">
-        <a href="#" class="card">
-          <div class="card-icon"><img src="img/alphaco.png" alt="AlphaCo" /></div>
-          <div class="card-text">
-            <p class="title">Cupom 🏷️ Lian na AlphaCo</p>
-            <span class="subtitle">As roupas mais confortáveis para treinar!!</span>
-          </div>
-        </a>
+<main>
 
-        <a href="#" class="card">
-          <div class="card-icon"><img src="img/gfarma.png" alt="Gfarma" /></div>
-          <div class="card-text">
-            <p class="title">Cupom 🏷️ Lian na Gfarma</p>
-            <span class="subtitle">Os melhores produtos para sua saúde!</span>
-          </div>
-        </a>
+  <!-- HERO -->
+  <section class="hero">
+    <img src="img/lian.jpg" alt="Lian Avatar" class="avatar" />
 
-        <a href="#" class="card">
-          <div class="card-icon"><img src="img/darklab.png" alt="DarkLab" /></div>
-          <div class="card-text">
-            <p class="title">Cupom 🏷️ Lian na DarkLab</p>
-            <span class="subtitle">Suplementos que vão te deixar gigante!</span>
-          </div>
-        </a>
+    <h1 class="title">Oii, eu sou o Lian.</h1>
+    <p class="subtitle">Streamer Otaku &amp; Fitness Enthusiast 👾💪🍥</p>
 
-        <a href="#" class="card">
-          <div class="card-icon"><img src="img/gymfenix.png" alt="GymFenix" /></div>
-          <div class="card-text">
-            <p class="title">Cupom 🏷️ Lian na GymFenix</p>
-            <span class="subtitle">As peças mais athlethics você encontra aqui!</span>
-          </div>
-        </a>
-      </div>
-    </section>
+    <ul class="bio-list">
+      <li>Lifestyle 🌱</li>
+      <li>Dicas 📚</li>
+      <li>Humor 😅</li>
+      <li>Motivação 💪</li>
+    </ul>
 
-    <!-- REDES SOCIAIS -->
-    <section class="cards-section">
-      <h2 class="section-title">🌐 Meus Canais</h2>
-      <div class="cards">
-        <a href="https://www.instagram.com/omalheiros_/" target="_blank" class="card">
-          <div class="card-icon"><img src="img/instagram.png" alt="Instagram" /></div>
-          <div class="card-text">
-            <p class="title">Instagram</p>
-            <span class="subtitle">@omalheiros_ no Instagram</span>
-          </div>
-        </a>
+    <p class="scroll-hint">⬇ Arraste ou role para ver meus links</p>
+  </section>
 
-        <a href="http://youtube.com/@Lianmalheiros" target="_blank" class="card">
-          <div class="card-icon"><img src="img/youtube.png" alt="YouTube" /></div>
-          <div class="card-text">
-            <p class="title">YouTube</p>
-            <span class="subtitle">Se inscreva no canal para dicas!</span>
-          </div>
-        </a>
+  <!-- CUPONS -->
+  <section class="cards-section">
+    <h2 class="section-title">💎 Cupons Exclusivos</h2>
 
-        <a href="https://www.tiktok.com/@omalheiros_" target="_blank" class="card">
-          <div class="card-icon"><img src="img/tiktok.png" alt="TikTok" /></div>
-          <div class="card-text">
-            <p class="title">TikTok</p>
-            <span class="subtitle">Siga @omalheiros_ e veja vídeos de humor!</span>
-          </div>
-        </a>
+    <div class="cards">
+      <a class="card" href="#">
+        <div class="card-icon"><img src="img/alphaco.png"></div>
+        <div class="card-text">
+          <p class="card-title">Cupom 🏷️ Lian na AlphaCo</p>
+          <span>As roupas mais confortáveis para treinar</span>
+        </div>
+      </a>
 
-        <a href="http://twitch.tv/omalheiros" target="_blank" class="card">
-          <div class="card-icon"><img src="img/twitch.png" alt="Twitch" /></div>
-          <div class="card-text">
-            <p class="title">Twitch</p>
-            <span class="subtitle">Assista minhas lives jogando e resenhando!</span>
-          </div>
-        </a>
-      </div>
-    </section>
-  </main>
-  
-  <script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
+      <a class="card" href="#">
+        <div class="card-icon"><img src="img/gfarma.png"></div>
+        <div class="card-text">
+          <p class="card-title">Cupom 🏷️ Lian na Gfarma</p>
+          <span>Os melhores produtos para sua saúde</span>
+        </div>
+      </a>
 
-<script>
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    smoothTouch: true,
-  });
+      <a class="card" href="#">
+        <div class="card-icon"><img src="img/darklab.png"></div>
+        <div class="card-text">
+          <p class="card-title">Cupom 🏷️ Lian na DarkLab</p>
+          <span>Suplementos pra te deixar gigante</span>
+        </div>
+      </a>
 
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
+      <a class="card" href="#">
+        <div class="card-icon"><img src="img/gymfenix.png"></div>
+        <div class="card-text">
+          <p class="card-title">Cupom 🏷️ Lian na GymFenix</p>
+          <span>As peças mais athlethics</span>
+        </div>
+      </a>
+    </div>
+  </section>
 
-  requestAnimationFrame(raf);
-</script>
+  <!-- REDES -->
+  <section class="cards-section">
+    <h2 class="section-title">🌐 Meus Canais</h2>
+
+    <div class="cards">
+      <a class="card" href="https://www.instagram.com/omalheiros_/" target="_blank">
+        <div class="card-icon"><img src="img/instagram.png"></div>
+        <div class="card-text">
+          <p class="card-title">Instagram</p>
+          <span>@omalheiros_</span>
+        </div>
+      </a>
+
+      <a class="card" href="http://youtube.com/@Lianmalheiros" target="_blank">
+        <div class="card-icon"><img src="img/youtube.png"></div>
+        <div class="card-text">
+          <p class="card-title">YouTube</p>
+          <span>Dicas e conteúdo</span>
+        </div>
+      </a>
+
+      <a class="card" href="https://www.tiktok.com/@omalheiros_" target="_blank">
+        <div class="card-icon"><img src="img/tiktok.png"></div>
+        <div class="card-text">
+          <p class="card-title">TikTok</p>
+          <span>Humor & vídeos rápidos</span>
+        </div>
+      </a>
+
+      <a class="card" href="http://twitch.tv/omalheiros" target="_blank">
+        <div class="card-icon"><img src="img/twitch.png"></div>
+        <div class="card-text">
+          <p class="card-title">Twitch</p>
+          <span>Lives e resenhas</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+</main>
+
 </body>
 </html>
