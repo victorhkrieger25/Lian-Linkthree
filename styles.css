@@ -192,20 +192,19 @@ main {
 ===================== */
 .card, .timeline-item {
   opacity: 0;
-  transform: translateX(-60px); /* entrada esquerda por padrão */
+  transform: translateX(-60px);
   transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
 .card:nth-child(even) {
-  transform: translateX(60px); /* alterna direita */
+  transform: translateX(60px);
 }
 
 .timeline-item {
-  transform: translateX(-60px); /* timeline sempre da esquerda */
+  transform: translateX(-60px);
 }
 
-/* Quando estiver visível */
-.card.active, .timeline-item.active {
+.card.active, .timeline-item.active, .section-title.active {
   opacity: 1;
   transform: translateX(0);
 }
@@ -219,5 +218,4 @@ main {
   0%   { transform: translateY(0px); }
   50%  { transform: translateY(-12px) translateX(4px); }
   100% { transform: translateY(0px); }
-}% { transform: translateY(0px); }
 }
