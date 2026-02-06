@@ -144,59 +144,86 @@ main {
 .card {
   display: flex;
   align-items: center;
-  gap: 18px;
-  padding: 0 22px;
-  height: 80px;
+  gap: 16px;
+  padding: 16px 18px;
+  min-height: 78px;
   width: 100%;
   text-decoration: none;
   color: #fff;
+
   background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
   border-radius: 16px;
   border: 1px solid rgba(255, 255, 255, 0.18);
+
   box-shadow:
-    0 6px 20px rgba(0, 0, 0, 0.45),
-    0 0 10px rgba(124, 58, 237, 0.3);
-  transition: all 0.4s ease;
+    0 6px 18px rgba(0, 0, 0, 0.45),
+    0 0 8px rgba(124, 58, 237, 0.25);
+
+  transition:
+    transform 0.25s ease,
+    background 0.25s ease,
+    box-shadow 0.25s ease;
 }
 
 .card:hover {
-  transform: translateY(-3px);
-  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    0 10px 26px rgba(0, 0, 0, 0.55),
+    0 0 14px rgba(124, 58, 237, 0.45);
 }
 
+/* Feedback de toque (mobile) */
+.card:active {
+  transform: scale(0.98);
+}
+
+/* =====================
+   ÍCONE
+===================== */
 .card-icon {
-  width: 60px;
-  height: 60px;
-  min-width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(0,0,0,0.45);
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
   border-radius: 50%;
+  overflow: hidden;
+
+  background: rgba(0,0,0,0.45);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.15);
 }
 
 .card-icon img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%;
 }
 
+/* =====================
+   TEXTO
+===================== */
 .card-text {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
 }
 
 .card-text .title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
+  line-height: 1.25;
+  margin: 0;
 }
 
 .card-text .subtitle {
-  font-size: 0.8rem;
+  font-size: 0.78rem;
+  line-height: 1.3;
   color: rgba(255,255,255,0.7);
+  margin: 0;
 }
 
 /* =====================
