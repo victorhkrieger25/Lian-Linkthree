@@ -200,3 +200,19 @@ main {
 @media (max-width: 480px) {
   .title { font-size: 1.7rem; }
 }
+
+/* =====================
+   SCROLL REVEAL GLOBAL
+===================== */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px) scale(0.98);
+  transition: 
+    opacity 0.8s ease,
+    transform 0.8s cubic-bezier(.22,.61,.36,1);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
