@@ -10,17 +10,34 @@
 body {
   font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  background:
-    radial-gradient(circle at center, rgba(124, 58, 237, 0.16) 0%, transparent 70%),
-    linear-gradient(180deg, #0b0616 0%, #120a25 100%);
-  background-attachment: fixed;
-  background-repeat: no-repeat;
-  background-size: cover;
   color: #fff;
   overflow-x: hidden;
   position: relative;
-}
 
+  /* Fundo principal */
+  background:
+    radial-gradient(
+      circle at 20% 10%,
+      rgba(124, 58, 237, 0.25),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(168, 85, 247, 0.18),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 50% 90%,
+      rgba(99, 102, 241, 0.15),
+      transparent 50%
+    ),
+    linear-gradient(
+      180deg,
+      #06020d 0%,
+      #0b0616 40%,
+      #120a25 100%
+    );
+}
 /* NOISE */
 body::before {
   content: "";
