@@ -1,4 +1,6 @@
-/* RESET */
+/* =====================
+   RESET
+===================== */
 * {
   margin: 0;
   padding: 0;
@@ -8,104 +10,123 @@
 body {
   font-family: 'Inter', system-ui, sans-serif;
   min-height: 100vh;
-  background: linear-gradient(180deg, #06020d, #120a25);
   color: #fff;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(124, 58, 237, 0.25), transparent 40%),
+    radial-gradient(circle at 80% 30%, rgba(168, 85, 247, 0.18), transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(99, 102, 241, 0.15), transparent 50%),
+    linear-gradient(180deg, #06020d 0%, #0b0616 40%, #120a25 100%);
 }
 
-/* MAIN */
+/* =====================
+   MAIN
+===================== */
 main {
-  max-width: 520px;
+  width: 100%;
+  max-width: 560px;
   margin: 0 auto;
   padding: 40px 16px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  align-items: center;
 }
 
-/* HERO */
+/* =====================
+   HERO
+===================== */
 .hero {
+  width: 100%;
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-  align-items: center;
+  margin-bottom: 32px;
 }
 
 .avatar {
   width: 140px;
+  max-width: 35vw;
   aspect-ratio: 1;
   border-radius: 50%;
   object-fit: cover;
-  box-shadow: 0 0 20px rgba(124,58,237,.6);
+  margin-bottom: 20px;
 }
 
 .title {
-  font-size: 1.9rem;
+  font-size: 2rem;
   font-weight: 700;
 }
 
 .subtitle {
   font-size: 1rem;
-  opacity: .85;
+  opacity: 0.85;
+  margin-bottom: 16px;
 }
 
 .bio-list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
   justify-content: center;
+  gap: 10px;
+  margin-bottom: 16px;
 }
 
 .bio-list li {
-  background: rgba(255,255,255,.1);
+  font-size: 0.85rem;
+  background: rgba(255,255,255,0.1);
   padding: 6px 12px;
   border-radius: 20px;
-  font-size: .85rem;
 }
 
 .scroll-hint {
-  font-size: .8rem;
-  opacity: .6;
+  font-size: 0.8rem;
+  opacity: 0.6;
 }
 
-/* TITLES */
+/* =====================
+   SECTION TITLES
+===================== */
 .section-title {
-  text-align: center;
   font-size: 1.4rem;
   font-weight: 700;
+  text-align: center;
+  margin: 28px 0 16px;
 }
 
-/* CARDS */
+/* =====================
+   CARDS
+===================== */
 .cards {
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 14px;
 }
 
 .card {
+  width: 100%;
+  min-height: 78px;
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 16px;
   padding: 14px 18px;
-  border-radius: 16px;
-  background: rgba(255,255,255,.08);
   text-decoration: none;
   color: #fff;
-  transition: .3s;
+  background: rgba(255,255,255,0.08);
+  border-radius: 16px;
+  transition: 0.3s ease;
 }
 
 .card:hover {
-  background: rgba(255,255,255,.14);
   transform: translateY(-3px);
+  background: rgba(255,255,255,0.14);
 }
 
 .card-icon {
-  width: 52px;
-  height: 52px;
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
   border-radius: 50%;
   overflow: hidden;
-  flex-shrink: 0;
 }
 
 .card-icon img {
@@ -114,6 +135,7 @@ main {
   object-fit: cover;
 }
 
+/* 🔥 CLASSES NOVAS (sem conflito) */
 .card-text {
   display: flex;
   flex-direction: column;
@@ -121,18 +143,20 @@ main {
 }
 
 .card-title {
-  font-size: .95rem;
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-.card-text span {
-  font-size: .75rem;
-  opacity: .7;
+.card-subtitle {
+  font-size: 0.75rem;
+  opacity: 0.7;
 }
 
-/* RESPONSIVO MAIOR */
-@media (min-width: 600px) {
-  main {
-    max-width: 620px;
-  }
+/* =====================
+   MOBILE FINO
+===================== */
+@media (max-width: 420px) {
+  .title { font-size: 1.6rem; }
+  .card { padding: 12px 14px; }
+  .card-title { font-size: 0.9rem; }
 }
