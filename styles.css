@@ -96,7 +96,7 @@ main {
 ===================== */
 .section-title {
   font-size: 1rem;
-  font-weight: 800;
+  font-weight: 16px;
   margin: 32px 0 16px;
   background: linear-gradient(90deg, #fff, #a78bfa);
   -webkit-background-clip: text;
