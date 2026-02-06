@@ -9,6 +9,7 @@
 
 <body>
   <main>
+
     <!-- HERO -->
     <section class="hero">
       <img src="img/lian.jpg" alt="Lian Avatar" class="avatar animate-slide-in" />
@@ -122,24 +123,61 @@
         </a>
       </div>
     </section>
-    
-   <section class="evolution" id="evolution">
-  <h2 class="section-title">🔥 Evolução na Academia</h2>
 
-  <div class="evolution-container">
-    <div class="evolution-image">
-      <img id="evoImage" src="img/IMG_8749.jpeg" alt="Evolução 2023">
-    </div>
+    <!-- LINHA DO TEMPO -->
+    <section class="timeline">
+      <h2 class="section-title">🔥 Linha do Tempo — Evolução</h2>
 
-    <div class="evolution-info">
-      <span class="evolution-year" id="evoYear">2023</span>
-      <p class="evolution-text" id="evoText">
-        Começo da fase mais séria. Ajustes de treino e mentalidade.
-      </p>
-    </div>
-  </div>
-</section>
-    
+      <div class="timeline-wrapper">
+        <div class="timeline-line"></div>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <img src="img/IMG_8749.jpeg" alt="Evolução 2023">
+            <div class="text">
+              <h3>2023</h3>
+              <p>Início da jornada séria. Mudança de mentalidade e consistência.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <img src="img/evo-2024.jpg" alt="Evolução 2024">
+            <div class="text">
+              <h3>2024</h3>
+              <p>O shape começou a responder. Disciplina virou rotina.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <img src="img/evo-2025.jpg" alt="Evolução 2025">
+            <div class="text">
+              <h3>2025</h3>
+              <p>Volume, maturidade muscular e foco total.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <span class="timeline-dot"></span>
+          <div class="timeline-content">
+            <img src="img/evo-2026.jpg" alt="Evolução 2026">
+            <div class="text">
+              <h3>2026</h3>
+              <p>Versão mais forte até agora. Disciplina virou identidade.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
   </main>
 
   <!-- LENIS -->
@@ -156,63 +194,11 @@
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
   </script>
-  <script>
-  const stages = [
-    {
-      year: "2023",
-      progress: 25,
-      text: "Começo da fase mais séria. Ajustes de treino e mentalidade."
-    },
-    {
-      year: "2024",
-      progress: 50,
-      text: "Constância total. Shape começou a responder de verdade."
-    },
-    {
-      year: "2025",
-      progress: 75,
-      text: "Volume, maturidade muscular e foco absoluto."
-    },
-    {
-      year: "2026",
-      progress: 100,
-      text: "Versão mais forte até agora. Disciplina virou estilo de vida."
-    }
-  ];
 
-  let index = 0;
+  <!-- TIMELINE JS -->
+  <script src="evolution.js"></script>
 
-  const yearEl = document.getElementById("year");
-  const progressEl = document.getElementById("progress");
-  const textEl = document.getElementById("evoText");
-
-  function updateStage(i) {
-    yearEl.style.opacity = 0;
-    textEl.style.opacity = 0;
-
-    setTimeout(() => {
-      yearEl.textContent = stages[i].year;
-      progressEl.style.width = stages[i].progress + "%";
-      textEl.textContent = stages[i].text;
-
-      yearEl.style.opacity = 1;
-      textEl.style.opacity = 1;
-    }, 200);
-  }
-
-  window.addEventListener("wheel", (e) => {
-    if (e.deltaY > 0 && index < stages.length - 1) {
-      index++;
-      updateStage(index);
-    } else if (e.deltaY < 0 && index > 0) {
-      index--;
-      updateStage(index);
-    }
-  });
-</script>
-  
 </body>
 </html>
