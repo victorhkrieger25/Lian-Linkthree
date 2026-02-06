@@ -8,26 +8,28 @@ const lenis = new Lenis({
   smoothTouch: true
 });
 
-function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
+function raf(time){
+  lenis.raf(time);
+  requestAnimationFrame(raf);
+}
 requestAnimationFrame(raf);
 
 // ==========================
 // FADE + SLIDE AO SCROLL
 // ==========================
 document.addEventListener("DOMContentLoaded", () => {
+
+  // Seleciona elementos
   const cards = document.querySelectorAll(".card");
   const timelineItems = document.querySelectorAll(".timeline-item");
   const heroElements = document.querySelectorAll(".hero img, .hero .title, .hero .subtitle, .bio-list, .scroll-hint");
 
-  // Classes iniciais
-  cards.forEach((card, i) => {
-    card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
-  });
-
+  // Adiciona classes iniciais para animação
+  cards.forEach((card, i) => card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right"));
   timelineItems.forEach(item => item.classList.add("fade-slide"));
   heroElements.forEach(el => el.classList.add("fade-slide"));
 
-  // Observer
+  // IntersectionObserver para ativar animações quando entram na tela
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
       if(entry.isIntersecting){
@@ -37,70 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, { threshold: 0.2 });
 
-  // Observar todos
-  document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right")
-          .forEach(el => observer.observe(el));
-});
-
-document.addEventListener("DOMContentLoaded", () => {
-  // LENIS SMOOTH SCROLL
-  const lenis = new Lenis({
-    duration: 1.2,
-    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    smoothWheel: true,
-    smoothTouch: true
-  });
-  function raf(time){ lenis.raf(time); requestAnimationFrame(raf); }
-  requestAnimationFrame(raf);
-
-  // ELEMENTOS PARA ANIMAÇÃO
-  const cards = document.querySelectorAll(".card");
-  const timelineItems = document.querySelectorAll(".timeline-item");
-  const heroElements = document.querySelectorAll(".hero img, .hero .title, .hero .subtitle, .bio-list, .scroll-hint");
-
-  // CLASSES INICIAIS PARA CARDS
-  cards.forEach((card, i) => {
-    card.classList.add(i % 2 === 0 ? "fade-slide-left" : "fade-slide-right");
-  });
-
-  heroElements.forEach(el => el.classList.add("fade-slide"));
-
-  // OBSERVER
-  const observer = new IntersectionObserver((entries, obs) => {
-    entries.forEach(entry => {
-      if(entry.isIntersecting){
-        entry.target.classList.add("active");
-        obs.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.2 });
-
-  // OBSERVAR TODOS
+  // Observa todos os elementos animáveis
   document.querySelectorAll(".fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item")
           .forEach(el => observer.observe(el));
+
 });
-
-// =====================
-// FADE & SLIDE ANIMATION
-// =====================
-
-// Seleciona todos os elementos animáveis
-const fadeElements = document.querySelectorAll('.fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item');
-
-// Função para verificar se o elemento entrou na tela
-function checkFade() {
-  const triggerBottom = window.innerHeight * 0.85;
-
-  fadeElements.forEach(el => {
-    const elTop = el.getBoundingClientRect().top;
-
-    if (elTop < triggerBottom) {
-      el.classList.add('active');
-    }
-  });
-}
-
-// Ativa na rolagem e também na carga inicial
-window.addEventListener('scroll', checkFade);
-window.addEventListener('load', checkFade);
-
