@@ -80,3 +80,27 @@ document.addEventListener("DOMContentLoaded", () => {
           .forEach(el => observer.observe(el));
 });
 
+// =====================
+// FADE & SLIDE ANIMATION
+// =====================
+
+// Seleciona todos os elementos animáveis
+const fadeElements = document.querySelectorAll('.fade-slide, .fade-slide-left, .fade-slide-right, .timeline-item');
+
+// Função para verificar se o elemento entrou na tela
+function checkFade() {
+  const triggerBottom = window.innerHeight * 0.85;
+
+  fadeElements.forEach(el => {
+    const elTop = el.getBoundingClientRect().top;
+
+    if (elTop < triggerBottom) {
+      el.classList.add('active');
+    }
+  });
+}
+
+// Ativa na rolagem e também na carga inicial
+window.addEventListener('scroll', checkFade);
+window.addEventListener('load', checkFade);
+
