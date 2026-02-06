@@ -294,3 +294,29 @@ main {
   .card { padding: 16px 16px; }
   .card-icon { width: 46px; height: 46px; }
 }
+
+/* =====================
+   SCROLL ANIMATIONS
+===================== */
+
+.pre-animate {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  filter: blur(6px);
+}
+
+.animate {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+    filter 0.9s ease;
+}
+
+/* Delay progressivo */
+.card.animate { transition-delay: 0.05s; }
+.timeline-item.animate { transition-delay: 0.1s; }
+.section-title.animate { transition-delay: 0.15s; }
+.hero.animate { transition-delay: 0.2s; }
