@@ -261,3 +261,53 @@ main {
   .card { padding: 16px 16px; }
   .card-icon { width: 46px; height: 46px; }
 }
+
+/* TIMELINE */
+.timeline { width: 100%; margin-top: 70px; }
+.timeline-wrapper { position: relative; padding-left: 26px; }
+.timeline-line { position: absolute; left: 6px; top: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, #a78bfa, transparent); box-shadow: 0 0 40px rgba(124,58,237,0.9); }
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 50px;
+}
+
+.timeline-dot {
+  position: absolute;
+  left: -2px;
+  top: 16px;
+  width: 14px;
+  height: 14px;
+  background: #a78bfa;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(124,58,237,1);
+}
+
+.timeline-content {
+  background: rgba(255,255,255,0.08);
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(124,58,237,0.35);
+  box-shadow: 0 14px 36px rgba(0,0,0,0.75), 0 0 34px rgba(124,58,237,0.35);
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.timeline-content img {
+  width: 100%;
+  max-height: 320px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 12px;
+}
+
+.timeline-content .text { padding: 18px; }
+.timeline-content h3 { font-size: 1.3rem; margin-bottom: 6px; }
+.timeline-content p { font-size: 0.9rem; color: rgba(255,255,255,0.85); line-height: 1.5; }
+
+/* Ativa quando entra na tela */
+.timeline-item.active .timeline-content {
+  opacity: 1;
+  transform: translateY(0);
+}
