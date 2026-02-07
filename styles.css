@@ -229,3 +229,24 @@ main {
     opacity .9s ease,
     transform .9s cubic-bezier(.22,1,.36,1);
 }
+
+/* TEXTO DOS CUPONS */
+
+.card.coupon strong {
+  color: #e9d5ff; /* lilás claro premium */
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.card.coupon small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 0.78rem;
+  line-height: 1.3;
+}
+
+.card.coupon b {
+  color: #22d3ee; /* destaque do cupom */
+  font-weight: 700;
+}
