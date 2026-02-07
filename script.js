@@ -1,33 +1,30 @@
-document.addEventListener('DOMContentLoaded', () => {
-  const reveals = document.querySelectorAll('.reveal');
-  const timelineImages = document.querySelectorAll('.timeline-card img');
+// REVEAL
+const reveals = document.querySelectorAll('.reveal');
 
-  const revealOnScroll = () => {
-    const windowHeight = window.innerHeight;
+const revealOnScroll = () => {
+  const h = window.innerHeight;
+  reveals.forEach(el => {
+    if (el.getBoundingClientRect().top < h - 80) {
+      el.classList.add('active');
+    }
+  });
+};
 
-    reveals.forEach((el, index) => {
-      const elementTop = el.getBoundingClientRect().top;
+window.addEventListener('scroll', revealOnScroll);
+revealOnScroll();
 
-      if (elementTop < windowHeight - 120) {
-        el.classList.add('active');
+// THEME TOGGLE
+const toggle = document.getElementById('themeToggle');
+const body = document.body;
 
-        // efeito stagger (delay automático)
-        el.style.transitionDelay = `${index * 0.12}s`;
-      }
-    });
+if (localStorage.getItem('theme') === 'light') {
+  body.classList.remove('dark');
+  toggle.textContent = '🌙';
+}
 
-    // parallax suave nas imagens da timeline
-    timelineImages.forEach(img => {
-      const rect = img.getBoundingClientRect();
-      const speed = 0.15;
-
-      if (rect.top < windowHeight && rect.bottom > 0) {
-        const offset = (rect.top - windowHeight / 2) * speed;
-        img.style.transform = `translateY(${offset}px) scale(1.05)`;
-      }
-    });
-  };
-
-  window.addEventListener('scroll', revealOnScroll);
-  revealOnScroll();
+toggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
+  const isDark = body.classList.contains('dark');
+  toggle.textContent = isDark ? '☀️' : '🌙';
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
 });
