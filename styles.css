@@ -107,17 +107,61 @@ main {
 .card strong { color: var(--text-main); }
 .card small { color: var(--text-muted); }
 
+/* ===== CUPOM FIX ===== */
+
+.card.coupon {
+  position: relative;
+  padding-right: 72px; /* espaço pro selo */
+  overflow: hidden;
+}
+
+/* selo */
 .card.coupon::after {
-  content:"CUPOM";
-  position:absolute;
-  top:10px;
-  right:-28px;
-  background:linear-gradient(90deg,var(--accent-purple),var(--accent-cyan));
-  color:#fff;
-  font-size:.65rem;
-  font-weight:700;
-  padding:4px 36px;
-  transform:rotate(45deg);
+  content: "CUPOM";
+  position: absolute;
+  top: 14px;
+  right: -36px;
+  background: linear-gradient(
+    135deg,
+    var(--accent-purple),
+    var(--accent-cyan)
+  );
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  padding: 6px 44px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 20px rgba(124,58,237,.7);
+  pointer-events: none;
+}
+
+/* texto do cupom */
+.card.coupon strong {
+  color: #f5f3ff;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.card.coupon small {
+  display: block;
+  margin-top: 4px;
+  color: rgba(255,255,255,.7);
+  font-size: .78rem;
+  line-height: 1.35;
+}
+
+/* mobile ultra seguro */
+@media (max-width: 380px) {
+  .card.coupon {
+    padding-right: 56px;
+  }
+
+  .card.coupon::after {
+    font-size: .6rem;
+    padding: 5px 36px;
+    right: -34px;
+  }
 }
 
 .timeline {
