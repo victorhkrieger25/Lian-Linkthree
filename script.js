@@ -1,4 +1,4 @@
-// animação de entrada suave
+// entrada suave
 document.querySelectorAll('section').forEach((el, i) => {
   el.style.opacity = 0;
   el.style.transform = 'translateY(20px)';
@@ -9,11 +9,12 @@ document.querySelectorAll('section').forEach((el, i) => {
   }, 200 * i);
 });
 
-// parallax no avatar
-const avatar = document.querySelector('.avatar');
+// timeline automática
+const slides = document.querySelectorAll('.timeline img');
+let current = 0;
 
-document.addEventListener('mousemove', e => {
-  const x = (window.innerWidth/2 - e.clientX)/40;
-  const y = (window.innerHeight/2 - e.clientY)/40;
-  avatar.style.transform = `translateY(-10px) rotateX(${y}deg) rotateY(${x}deg)`;
-});
+setInterval(() => {
+  slides[current].classList.remove('active');
+  current = (current + 1) % slides.length;
+  slides[current].classList.add('active');
+}, 2500);
