@@ -1,229 +1,129 @@
-/* =====================
-   RESET
-===================== */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
 body {
-  font-family: "Inter", system-ui, sans-serif;
-  min-height: 100vh;
+  font-family: Inter, system-ui, sans-serif;
   color: #fff;
-
-  /* 🔥 FUNDO ORIGINAL (MELHORADO) */
   background:
-    radial-gradient(circle at top, rgba(124, 58, 237, 0.18), transparent 60%),
-    radial-gradient(circle at bottom, rgba(236, 72, 153, 0.12), transparent 55%),
-    #0b0b12;
-
-  position: relative;
-  overflow-x: hidden;
+    radial-gradient(circle at center, rgba(124,58,237,.18), transparent 70%),
+    linear-gradient(180deg,#0b0616,#120a25);
+  min-height: 100vh;
 }
 
-/* =====================
-   NOISE OVERLAY
-===================== */
-body::after {
+body::before {
   content: "";
   position: fixed;
   inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  z-index: 999;
 }
 
-/* =====================
-   LAYOUT
-===================== */
 main {
-  max-width: 420px;
-  margin: 0 auto;
-  padding: 28px 16px 80px;
+  max-width: 480px;
+  margin: auto;
+  padding: 40px 20px;
+}
+
+.hero {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.avatar {
+  width: 130px;
+  border-radius: 50%;
+  box-shadow: 0 0 30px rgba(124,58,237,.7);
+  margin-bottom: 16px;
+}
+
+.title {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.subtitle {
+  opacity: .85;
+  margin: 8px 0 14px;
+}
+
+.bio-list {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bio-list li {
+  background: rgba(255,255,255,.1);
+  padding: 5px 10px;
+  border-radius: 20px;
+  font-size: .8rem;
 }
 
 .section-title {
   text-align: center;
-  font-size: 1.1rem;
-  margin-bottom: 16px;
-  opacity: 0.9;
-}
-
-/* =====================
-   HERO
-===================== */
-.hero {
-  text-align: center;
-  padding: 36px 0 50px;
-}
-
-.avatar {
-  width: 112px;
-  height: 112px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 16px;
-
-  border: 3px solid rgba(255,255,255,0.15);
-  box-shadow: 0 0 25px rgba(124,58,237,0.35);
-}
-
-.hero .title {
-  font-size: 1.45rem;
-  font-weight: 700;
-}
-
-.hero .subtitle {
-  font-size: 0.9rem;
-  opacity: 0.85;
-  margin-top: 6px;
-}
-
-/* =====================
-   BIO TAGS
-===================== */
-.bio-list {
-  list-style: none;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-top: 18px;
-}
-
-.bio-list li {
-  padding: 6px 12px;
-  font-size: 0.75rem;
-  border-radius: 14px;
-  background: rgba(255,255,255,0.08);
-  backdrop-filter: blur(8px);
-}
-
-/* =====================
-   SCROLL HINT
-===================== */
-.scroll-hint {
-  margin-top: 22px;
-  font-size: 0.75rem;
-  opacity: 0.6;
-}
-
-/* =====================
-   CARDS
-===================== */
-.cards-section {
-  margin-top: 54px;
+  margin: 30px 0 14px;
+  font-size: 1.4rem;
+  background: linear-gradient(90deg,#fff,#7c3aed);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cards {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  display: grid;
+  gap: 12px;
 }
 
 .card {
   display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px 16px;
-  border-radius: 16px;
+  gap: 12px;
+  padding: 12px 14px;
+  background: rgba(255,255,255,.08);
+  border-radius: 14px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 0 18px rgba(124,58,237,.35);
   text-decoration: none;
   color: #fff;
-
-  background: linear-gradient(
-    135deg,
-    rgba(255,255,255,0.08),
-    rgba(255,255,255,0.03)
-  );
-
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255,255,255,0.12);
-
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform .25s ease;
 }
 
 .card:hover {
   transform: translateY(-3px);
-  box-shadow:
-    0 0 0 1px rgba(124,58,237,0.35),
-    0 12px 30px rgba(124,58,237,0.25);
 }
 
 .card-icon {
-  width: 44px;
-  height: 44px;
-  border-radius: 12px;
-  background: rgba(255,255,255,0.12);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .card-icon img {
-  width: 22px;
-  height: 22px;
-}
-
-.card-text .title {
-  font-size: 0.85rem;
-  font-weight: 600;
-}
-
-.card-text .subtitle {
-  font-size: 0.72rem;
-  opacity: 0.75;
-}
-
-/* =====================
-   TIMELINE
-===================== */
-.timeline {
-  margin-top: 56px;
-}
-
-.timeline-container {
-  display: flex;
-  flex-direction: column;
-  gap: 22px;
-}
-
-.timeline-item {
-  display: flex;
-  gap: 14px;
-  align-items: center;
-}
-
-.timeline-item img {
-  width: 72px;
-  height: 72px;
-  border-radius: 14px;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
-  box-shadow: 0 0 20px rgba(236,72,153,0.35);
 }
 
-.timeline-info h4 {
-  font-size: 0.85rem;
-  margin-bottom: 4px;
+.timeline {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
 }
 
-.timeline-info p {
-  font-size: 0.72rem;
-  opacity: 0.75;
+.timeline img {
+  height: 140px;
+  border-radius: 14px;
+  box-shadow: 0 0 18px rgba(124,58,237,.4);
 }
 
-/* =====================
-   ANIMAÇÕES
-===================== */
+/* ANIMAÇÕES */
 .reveal {
   opacity: 0;
-  transform: translateY(22px);
-  transition: all 0.8s ease;
+  transform: translateY(40px);
+  transition: .8s ease;
 }
 
 .reveal.active {
@@ -231,11 +131,10 @@ main {
   transform: translateY(0);
 }
 
-.animate-bounce {
-  animation: bounce 1.8s infinite;
+@keyframes bounce {
+  50% { transform: translateY(6px); }
 }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+.animate-bounce {
+  animation: bounce 1.4s infinite;
 }
