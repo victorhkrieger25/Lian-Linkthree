@@ -7,7 +7,7 @@
   --accent-purple: #7c3aed;
   --accent-cyan: #22d3ee;
   --shadow-soft: 0 10px 30px rgba(0,0,0,.15);
-  --shadow-glow: 0 0 35px rgba(124,58,237,.35);
+  --shadow-glow: 0 0 35px rgba(124,58,237,.15); /* Suavizado para o modo claro */
 }
 
 body.dark {
@@ -65,6 +65,7 @@ main {
   padding:6px 14px;
   border-radius:20px;
   background: var(--bg-card);
+  font-size: 0.9rem;
 }
 
 .section-title {
@@ -83,6 +84,7 @@ main {
 }
 
 .card {
+  text-decoration: none; /* Remove underline de links */
   display:flex;
   align-items:center;
   gap:14px;
@@ -105,65 +107,43 @@ main {
 }
 
 .card strong { color: var(--text-main); }
-.card small { color: var(--text-muted); }
+.card small { color: var(--text-muted); display: block; }
 
 /* ===== CUPOM FIX ===== */
 
 .card.coupon {
   position: relative;
-  padding-right: 72px; /* espaço pro selo */
+  padding-right: 72px; 
   overflow: hidden;
 }
 
-/* selo */
 .card.coupon::after {
   content: "CUPOM";
   position: absolute;
   top: 14px;
   right: -36px;
-  background: linear-gradient(
-    135deg,
-    var(--accent-purple),
-    var(--accent-cyan)
-  );
+  background: linear-gradient(135deg, var(--accent-purple), var(--accent-cyan));
   color: #fff;
   font-size: .65rem;
   font-weight: 700;
   letter-spacing: .08em;
   padding: 6px 44px;
   transform: rotate(45deg);
-  box-shadow: 0 0 20px rgba(124,58,237,.7);
+  box-shadow: 0 0 20px rgba(124,58,237,.4);
   pointer-events: none;
 }
 
-/* texto do cupom */
+/* Ajuste de cores para o texto do cupom não sumir no modo claro */
 .card.coupon strong {
-  color: #f5f3ff;
+  color: var(--text-main);
   font-size: 1rem;
-  line-height: 1.2;
 }
 
 .card.coupon small {
-  display: block;
-  margin-top: 4px;
-  color: rgba(255,255,255,.7);
-  font-size: .78rem;
-  line-height: 1.35;
+  color: var(--text-muted);
 }
 
-/* mobile ultra seguro */
-@media (max-width: 380px) {
-  .card.coupon {
-    padding-right: 56px;
-  }
-
-  .card.coupon::after {
-    font-size: .6rem;
-    padding: 5px 36px;
-    right: -34px;
-  }
-}
-
+/* Timeline */
 .timeline {
   margin-top:32px;
   display:flex;
@@ -198,15 +178,16 @@ main {
 
 .timeline-caption { padding:16px; }
 
+/* Reveal Animation */
 .reveal {
   opacity:0;
   transform: translateY(40px);
+  transition:.8s ease;
 }
 
 .reveal.active {
   opacity:1;
   transform: translateY(0);
-  transition:.8s ease;
 }
 
 .theme-toggle {
@@ -216,8 +197,21 @@ main {
   width:44px;
   height:44px;
   border-radius:50%;
-  border:none;
+  border:1px solid rgba(0,0,0,0.1);
   cursor:pointer;
   background:var(--bg-card);
   box-shadow:var(--shadow-soft);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.dark .theme-toggle {
+  border-color: rgba(255,255,255,0.1);
+}
+
+@media (max-width: 380px) {
+  .card.coupon { padding-right: 56px; }
+  .card.coupon::after { font-size: .6rem; padding: 5px 36px; right: -34px; }
 }
