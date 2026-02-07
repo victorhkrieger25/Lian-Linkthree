@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lian - Linktree Supremo</title>
+  <title>Lian | Linktree</title>
+
   <link rel="stylesheet" href="styles.css" />
 </head>
 
@@ -12,13 +13,10 @@
 
   <!-- HERO -->
   <section class="hero reveal">
-    <img src="img/lian.jpg" alt="Lian Avatar" class="avatar" />
+    <img src="img/lian.jpg" class="avatar" alt="Lian" />
 
     <h1 class="title">Oii, eu sou o Lian.</h1>
-
-    <p class="subtitle">
-      Streamer Otaku & Fitness Enthusiast 👾💪🍥
-    </p>
+    <p class="subtitle">Streamer Otaku & Fitness Enthusiast 👾💪🍥</p>
 
     <ul class="bio-list">
       <li>Lifestyle 🌱</li>
@@ -27,25 +25,23 @@
       <li>Motivação 💪</li>
     </ul>
 
-    <p class="scroll-hint animate-bounce">
-      ⬇ Arraste ou role para ver meus links
-    </p>
+    <p class="scroll-hint animate-bounce">⬇ Role para ver os links</p>
   </section>
 
   <!-- CUPONS -->
-  <section class="cards-section reveal">
+  <section class="reveal">
     <h2 class="section-title">💎 Cupons Exclusivos</h2>
 
     <div class="cards">
-      <a href="#" class="card">
+      <a class="card" href="#">
         <div class="card-icon"><img src="img/alphaco.png"></div>
         <div class="card-text">
           <p class="title">AlphaCo</p>
-          <span class="subtitle">Roupas confortáveis para treinar</span>
+          <span class="subtitle">Roupas fitness premium</span>
         </div>
       </a>
 
-      <a href="#" class="card">
+      <a class="card" href="#">
         <div class="card-icon"><img src="img/gfarma.png"></div>
         <div class="card-text">
           <p class="title">Gfarma</p>
@@ -53,30 +49,22 @@
         </div>
       </a>
 
-      <a href="#" class="card">
+      <a class="card" href="#">
         <div class="card-icon"><img src="img/darklab.png"></div>
         <div class="card-text">
           <p class="title">DarkLab</p>
           <span class="subtitle">Suplementos insanos</span>
         </div>
       </a>
-
-      <a href="#" class="card">
-        <div class="card-icon"><img src="img/gymfenix.png"></div>
-        <div class="card-text">
-          <p class="title">GymFenix</p>
-          <span class="subtitle">Moda fitness</span>
-        </div>
-      </a>
     </div>
   </section>
 
   <!-- REDES -->
-  <section class="cards-section reveal">
+  <section class="reveal">
     <h2 class="section-title">🌐 Meus Canais</h2>
 
     <div class="cards">
-      <a href="https://www.instagram.com/omalheiros_/" class="card" target="_blank">
+      <a class="card" href="#">
         <div class="card-icon"><img src="img/instagram.png"></div>
         <div class="card-text">
           <p class="title">Instagram</p>
@@ -84,83 +72,29 @@
         </div>
       </a>
 
-      <a href="https://youtube.com/@Lianmalheiros" class="card" target="_blank">
+      <a class="card" href="#">
         <div class="card-icon"><img src="img/youtube.png"></div>
         <div class="card-text">
           <p class="title">YouTube</p>
-          <span class="subtitle">Conteúdo fitness & lifestyle</span>
-        </div>
-      </a>
-
-      <a href="https://www.tiktok.com/@omalheiros_" class="card" target="_blank">
-        <div class="card-icon"><img src="img/tiktok.png"></div>
-        <div class="card-text">
-          <p class="title">TikTok</p>
-          <span class="subtitle">Vídeos rápidos e humor</span>
-        </div>
-      </a>
-
-      <a href="https://twitch.tv/omalheiros" class="card" target="_blank">
-        <div class="card-icon"><img src="img/twitch.png"></div>
-        <div class="card-text">
-          <p class="title">Twitch</p>
-          <span class="subtitle">Lives e resenha</span>
+          <span class="subtitle">Conteúdo fitness</span>
         </div>
       </a>
     </div>
   </section>
 
   <!-- TIMELINE -->
-  <section class="timeline reveal">
+  <section class="reveal">
     <h2 class="section-title">📈 Evolução</h2>
 
-    <div class="timeline-container">
-      <div class="timeline-item">
-        <img src="img/evo1.jpg">
-        <div class="timeline-info">
-          <h4>Início</h4>
-          <p>Primeiros treinos</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <img src="img/evo2.jpg">
-        <div class="timeline-info">
-          <h4>Constância</h4>
-          <p>Disciplina diária</p>
-        </div>
-      </div>
-
-      <div class="timeline-item">
-        <img src="img/evo3.jpg">
-        <div class="timeline-info">
-          <h4>Atual</h4>
-          <p>Evolução contínua</p>
-        </div>
-      </div>
+    <div class="timeline">
+      <img src="img/evo1.jpg">
+      <img src="img/evo2.jpg">
+      <img src="img/evo3.jpg">
     </div>
   </section>
 
 </main>
 
-<!-- LENIS -->
-<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/bundled/lenis.min.js"></script>
-<script>
-  const lenis = new Lenis({
-    duration: 1.2,
-    smoothWheel: true,
-    smoothTouch: true,
-  });
-
-  function raf(time) {
-    lenis.raf(time);
-    requestAnimationFrame(raf);
-  }
-  requestAnimationFrame(raf);
-</script>
-
-<!-- SEU JS -->
 <script src="script.js"></script>
-
 </body>
 </html>
