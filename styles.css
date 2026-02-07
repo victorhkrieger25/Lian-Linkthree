@@ -7,26 +7,50 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: "Inter", system-ui, sans-serif;
-  background: linear-gradient(180deg, #0f0f14, #07070a);
-  color: #fff;
   min-height: 100vh;
+  color: #fff;
+
+  /* 🔥 FUNDO ORIGINAL (MELHORADO) */
+  background:
+    radial-gradient(circle at top, rgba(124, 58, 237, 0.18), transparent 60%),
+    radial-gradient(circle at bottom, rgba(236, 72, 153, 0.12), transparent 55%),
+    #0b0b12;
+
+  position: relative;
+  overflow-x: hidden;
 }
 
 /* =====================
-   GLOBAL
+   NOISE OVERLAY
+===================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  z-index: 999;
+}
+
+/* =====================
+   LAYOUT
 ===================== */
 main {
   max-width: 420px;
   margin: 0 auto;
-  padding: 24px 16px 80px;
+  padding: 28px 16px 80px;
 }
 
 .section-title {
-  font-size: 1.1rem;
-  margin-bottom: 14px;
   text-align: center;
+  font-size: 1.1rem;
+  margin-bottom: 16px;
   opacity: 0.9;
 }
 
@@ -35,20 +59,22 @@ main {
 ===================== */
 .hero {
   text-align: center;
-  padding: 32px 0 48px;
+  padding: 36px 0 50px;
 }
 
 .avatar {
-  width: 110px;
-  height: 110px;
+  width: 112px;
+  height: 112px;
   border-radius: 50%;
   object-fit: cover;
   margin-bottom: 16px;
-  border: 3px solid rgba(255, 255, 255, 0.15);
+
+  border: 3px solid rgba(255,255,255,0.15);
+  box-shadow: 0 0 25px rgba(124,58,237,0.35);
 }
 
 .hero .title {
-  font-size: 1.4rem;
+  font-size: 1.45rem;
   font-weight: 700;
 }
 
@@ -58,22 +84,29 @@ main {
   margin-top: 6px;
 }
 
+/* =====================
+   BIO TAGS
+===================== */
 .bio-list {
   list-style: none;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 8px;
-  margin-top: 16px;
+  margin-top: 18px;
 }
 
 .bio-list li {
-  background: rgba(255, 255, 255, 0.08);
-  padding: 6px 10px;
-  border-radius: 12px;
+  padding: 6px 12px;
   font-size: 0.75rem;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
 }
 
+/* =====================
+   SCROLL HINT
+===================== */
 .scroll-hint {
   margin-top: 22px;
   font-size: 0.75rem;
@@ -84,37 +117,48 @@ main {
    CARDS
 ===================== */
 .cards-section {
-  margin-top: 48px;
+  margin-top: 54px;
 }
 
 .cards {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
 }
 
 .card {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.06);
-  border-radius: 14px;
+  gap: 14px;
+  padding: 14px 16px;
+  border-radius: 16px;
   text-decoration: none;
   color: #fff;
-  transition: transform 0.25s ease, background 0.25s ease;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255,255,255,0.08),
+    rgba(255,255,255,0.03)
+  );
+
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.12);
+
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .card:hover {
-  transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+  box-shadow:
+    0 0 0 1px rgba(124,58,237,0.35),
+    0 12px 30px rgba(124,58,237,0.25);
 }
 
 .card-icon {
-  width: 42px;
-  height: 42px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.12);
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.12);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -132,21 +176,21 @@ main {
 }
 
 .card-text .subtitle {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   opacity: 0.75;
 }
 
 /* =====================
-   TIMELINE EVOLUÇÃO
+   TIMELINE
 ===================== */
 .timeline {
-  margin-top: 48px;
+  margin-top: 56px;
 }
 
 .timeline-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 22px;
 }
 
 .timeline-item {
@@ -156,11 +200,11 @@ main {
 }
 
 .timeline-item img {
-  width: 70px;
-  height: 70px;
+  width: 72px;
+  height: 72px;
+  border-radius: 14px;
   object-fit: cover;
-  border-radius: 12px;
-  border: 2px solid rgba(255,255,255,0.15);
+  box-shadow: 0 0 20px rgba(236,72,153,0.35);
 }
 
 .timeline-info h4 {
@@ -169,37 +213,29 @@ main {
 }
 
 .timeline-info p {
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   opacity: 0.75;
 }
 
 /* =====================
    ANIMAÇÕES
 ===================== */
-.animate-slide-in {
-  animation: slideIn 0.8s ease forwards;
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .animate-bounce {
   animation: bounce 1.8s infinite;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
 @keyframes bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(6px);
-  }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
 }
