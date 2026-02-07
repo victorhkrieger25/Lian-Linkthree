@@ -140,25 +140,90 @@ main {
 
 .card small { opacity:.7; }
 
+/* =====================
+   TIMELINE
+===================== */
+
+.timeline-section {
+  margin-top: 48px;
+}
+
 .timeline {
-  position:relative;
-  height:220px;
-  margin-top:20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 32px;
+  padding-left: 24px;
 }
 
-.timeline img {
-  position:absolute;
-  inset:0;
-  margin:auto;
-  width:180px;
-  border-radius:18px;
-  opacity:0;
-  transform: scale(.9);
-  transition:1s;
-  box-shadow:0 0 40px #7c3aedaa;
+/* linha vertical */
+.timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    rgba(124,58,237,.8),
+    transparent
+  );
+  box-shadow: 0 0 18px rgba(124,58,237,.6);
 }
 
-.timeline img.active {
-  opacity:1;
-  transform: scale(1);
+/* item */
+.timeline-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* bolinha */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #7c3aed;
+  box-shadow:
+    0 0 12px rgba(124,58,237,.9),
+    0 0 24px rgba(124,58,237,.6);
+}
+
+/* imagem */
+.timeline-item img {
+  width: 120px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 30px rgba(0,0,0,.6),
+    0 0 30px rgba(124,58,237,.4);
+}
+
+/* texto */
+.timeline-item span {
+  font-weight: 600;
+  opacity: .85;
+}
+
+/* =====================
+   ANIMAÇÃO SCROLL
+===================== */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: .8s ease;
 }
