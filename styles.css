@@ -60,7 +60,7 @@ main {
 }
 
 .avatar {
-  width:120px;
+  width:100pc;
   border-radius:50%;
   margin-bottom:20px;
   animation: float 6s ease-in-out infinite, glow 4s ease-in-out infinite;
