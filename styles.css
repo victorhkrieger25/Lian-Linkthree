@@ -93,6 +93,34 @@ main {
   gap: 14px;
 }
 
+/* CUPONS */
+
+.card.coupon {
+  position: relative;
+  overflow: hidden;
+}
+
+.card.coupon::after {
+  content: "CUPOM";
+  position: absolute;
+  top: 10px;
+  right: -28px;
+  background: linear-gradient(90deg,#7c3aed,#22d3ee);
+  color: #fff;
+  font-size: .65rem;
+  font-weight: 700;
+  padding: 4px 36px;
+  transform: rotate(45deg);
+  box-shadow: 0 0 20px rgba(124,58,237,.7);
+}
+
+.card.coupon:hover {
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.7),
+    0 0 80px rgba(34,211,238,.6);
+}
+
+
 .card {
   display: flex;
   align-items: center;
