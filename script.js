@@ -1,41 +1,48 @@
-// CONFIGURAÇÃO DE TEMA (Executar o mais rápido possível)
-const toggle = document.getElementById('themeToggle');
+// =====================
+// TEMA (SISTEMA + MANUAL)
+// =====================
 const body = document.body;
+const toggle = document.getElementById('themeToggle');
 
-const applyTheme = (theme) => {
-  if (theme === 'light') {
-    body.classList.remove('dark');
-    toggle.textContent = '🌙';
-  } else {
-    body.classList.add('dark');
-    toggle.textContent = '☀️';
-  }
-};
+// Detecta tema do sistema
+const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-// Recupera a preferência salva
+// Tema salvo
 const savedTheme = localStorage.getItem('theme');
+
+// Aplica tema inicial
 if (savedTheme) {
-  applyTheme(savedTheme);
+  body.classList.toggle('dark', savedTheme === 'dark');
+} else {
+  body.classList.toggle('dark', systemPrefersDark);
 }
 
+// Ícone correto
+toggle.textContent = body.classList.contains('dark') ? '☀️' : '🌙';
+
+// Alternar manualmente
 toggle.addEventListener('click', () => {
+  body.classList.toggle('dark');
   const isDark = body.classList.contains('dark');
-  const newTheme = isDark ? 'light' : 'dark';
-  applyTheme(newTheme);
-  localStorage.setItem('theme', newTheme);
+  localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  toggle.textContent = isDark ? '☀️' : '🌙';
 });
 
-// REVEAL COM INTERSECTION OBSERVER (Mais performático)
+// =====================
+// REVEAL COM OBSERVER
+// =====================
 const reveals = document.querySelectorAll('.reveal');
 
-const revealObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('active');
-      // Opcional: parar de observar após revelar uma vez
-      revealObserver.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.15 }); // Dispara quando 15% do elemento está visível
+const observer = new IntersectionObserver(
+  entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  },
+  { threshold: 0.15 }
+);
 
-reveals.forEach(el => revealObserver.observe(el));
+reveals.forEach(el => observer.observe(el));
