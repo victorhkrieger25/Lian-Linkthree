@@ -46,3 +46,27 @@ const observer = new IntersectionObserver(
 );
 
 reveals.forEach(el => observer.observe(el));
+
+
+// GLOW DINÂMICO NOS CARDS
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', e => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+
+    card.style.background = `
+      radial-gradient(
+        circle at ${x}px ${y}px,
+        rgba(124,58,237,0.18),
+        var(--bg-card) 60%
+      )
+    `;
+  });
+
+  card.addEventListener('mouseleave', () => {
+    card.style.background = 'var(--bg-card)';
+  });
+});
+
+
