@@ -69,4 +69,15 @@ document.querySelectorAll('.card').forEach(card => {
   });
 });
 
+// PROGRESSO DA TIMELINE
+const timeline = document.querySelector('.timeline');
 
+if (timeline) {
+  window.addEventListener('scroll', () => {
+    const rect = timeline.getBoundingClientRect();
+    const height = rect.height;
+    const visible = Math.min(height, Math.max(0, window.innerHeight - rect.top));
+
+    timeline.style.setProperty('--progress', `${(visible / height) * 100}%`);
+  });
+}
