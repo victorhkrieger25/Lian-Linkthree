@@ -25,7 +25,11 @@ if (toggle) {
     toggle.textContent = isDark ? '☀️' : '🌙';
 
     toggle.animate(
-      [{ transform: 'scale(1)' }, { transform: 'scale(.85)' }, { transform: 'scale(1)' }],
+      [
+        { transform: 'scale(1)' },
+        { transform: 'scale(.85)' },
+        { transform: 'scale(1)' }
+      ],
       { duration: 220 }
     );
   });
@@ -63,25 +67,26 @@ const hero = document.querySelector('.hero');
 
 if (hero && !prefersReducedMotion) {
   window.addEventListener('scroll', () => {
-    const y = window.scrollY;
-    hero.style.transform = `translateY(${y * 0.15}px)`;
+    hero.style.transform = `translateY(${window.scrollY * 0.15}px)`;
   });
 }
 
 // =====================
 // GLOW REAGE AO SCROLL
 // =====================
-document.querySelectorAll('.card').forEach(card => {
+if (!prefersReducedMotion) {
   window.addEventListener('scroll', () => {
-    const rect = card.getBoundingClientRect();
-    const visible = Math.max(0, 1 - Math.abs(rect.top) / window.innerHeight);
+    document.querySelectorAll('.card').forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const visible = Math.max(0, 1 - Math.abs(rect.top) / window.innerHeight);
 
-    card.style.boxShadow = `
-      0 20px 40px rgba(0,0,0,.35),
-      0 0 ${30 + visible * 40}px rgba(124,58,237,.45)
-    `;
+      card.style.boxShadow = `
+        0 20px 40px rgba(0,0,0,.35),
+        0 0 ${30 + visible * 40}px rgba(124,58,237,.45)
+      `;
+    });
   });
-});
+}
 
 // =====================
 // TIMELINE PROGRESSIVA
@@ -96,15 +101,13 @@ if (timeline && !prefersReducedMotion) {
   });
 }
 
-
 // =====================
 // EASTER EGG — LAB MODE
 // =====================
-
 let labActive = false;
 let keyTimer = null;
 
-// Toast
+// TOAST
 const showLabToast = () => {
   const toast = document.createElement('div');
   toast.className = 'lab-toast';
@@ -120,15 +123,22 @@ const showLabToast = () => {
 
   requestAnimationFrame(() => toast.classList.add('show'));
 
-  setTimeout(() => {
-    toast.remove();
-  }, 4800);
+  setTimeout(() => toast.remove(), 4800);
 };
 
-// Ativar modo
+// ATIVA LAB MODE
 const activateLabMode = () => {
   if (labActive) return;
   labActive = true;
+
+  // GLITCH VISUAL
+  document.body.classList.add('lab-glitch');
+  setTimeout(() => {
+    document.body.classList.remove('lab-glitch');
+  }, 500);
+
+  // FEEDBACK TÁTIL (MOBILE)
+  navigator.vibrate?.([60, 40, 60]);
 
   document.body.classList.add('lab-mode');
   showLabToast();
@@ -139,7 +149,7 @@ const activateLabMode = () => {
   }, 6000);
 };
 
-// DESKTOP — segurar L
+// DESKTOP — SEGURAR "L"
 document.addEventListener('keydown', e => {
   if (e.key.toLowerCase() === 'l' && !keyTimer) {
     keyTimer = setTimeout(activateLabMode, 2000);
@@ -153,7 +163,7 @@ document.addEventListener('keyup', e => {
   }
 });
 
-// MOBILE — 3 taps no avatar
+// MOBILE — 3 TAPS NO AVATAR
 const avatar = document.querySelector('.avatar');
 let tapCount = 0;
 let tapTimer = null;
@@ -171,6 +181,3 @@ if (avatar) {
     }
   });
 }
-
-
-
