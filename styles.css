@@ -16,11 +16,18 @@
   --shadow-glow: 0 0 40px rgba(124,58,237,.18);
 }
 
-html, body {
+html {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
-  overscroll-behavior: none;
+}
+
+body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  overscroll-behavior-x: none;
 }
 
 body::before {
