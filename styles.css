@@ -144,6 +144,7 @@ main {
 }
 
 .bio-list {
+  margin-bottom: 24px;
   margin-top: 18px;
   list-style: none;
   display: flex;
