@@ -72,7 +72,7 @@ if (hero && !prefersReducedMotion) {
 }
 
 // =====================
-// GLOW REAGE AO SCROLL
+// GLOW REAGE AO SCROLL (RESPEITA TEMA)
 // =====================
 if (!prefersReducedMotion) {
   window.addEventListener('scroll', () => {
@@ -82,7 +82,7 @@ if (!prefersReducedMotion) {
 
       card.style.boxShadow = `
         0 20px 40px rgba(0,0,0,.35),
-        0 0 ${30 + visible * 40}px rgba(124,58,237,.45)
+        0 0 ${30 + visible * 40}px var(--accent-purple)
       `;
     });
   });
@@ -96,7 +96,10 @@ const timeline = document.querySelector('.timeline');
 if (timeline && !prefersReducedMotion) {
   window.addEventListener('scroll', () => {
     const rect = timeline.getBoundingClientRect();
-    const progress = Math.min(1, Math.max(0, 1 - rect.top / window.innerHeight));
+    const progress = Math.min(
+      1,
+      Math.max(0, 1 - rect.top / window.innerHeight)
+    );
     timeline.style.setProperty('--progress', `${progress * 100}%`);
   });
 }
@@ -122,22 +125,26 @@ const showLabToast = () => {
   document.body.appendChild(toast);
 
   requestAnimationFrame(() => toast.classList.add('show'));
-
   setTimeout(() => toast.remove(), 4800);
 };
 
-// ATIVA O VERDE PRIMEIRO
-document.body.classList.add('lab-mode');
+// ATIVA LAB MODE (VERDE PRIMEIRO)
+const activateLabMode = () => {
+  if (labActive) return;
+  labActive = true;
 
-// GLITCH POR CIMA DO VERDE
-document.body.classList.add('lab-glitch');
-setTimeout(() => {
-  document.body.classList.remove('lab-glitch');
-}, 600);
-  // FEEDBACK TÁTIL (MOBILE)
+  // 👉 ATIVA O VERDE PRIMEIRO
+  document.body.classList.add('lab-mode');
+
+  // GLITCH SOBRE O VERDE
+  document.body.classList.add('lab-glitch');
+  setTimeout(() => {
+    document.body.classList.remove('lab-glitch');
+  }, 600);
+
+  // FEEDBACK MOBILE
   navigator.vibrate?.([60, 40, 60]);
 
-  document.body.classList.add('lab-mode');
   showLabToast();
 
   setTimeout(() => {
