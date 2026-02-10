@@ -128,7 +128,14 @@ const showLabToast = () => {
   toast.className = 'lab-toast';
   toast.innerHTML = `
     <strong>🧪 Modo laboratório ativado</strong><br>
-    Disciplina > motivação.
+    toast.innerHTML = `
+  <strong>🧪 Modo laboratório ativado</strong><br>
+  Resultados podem incluir:<br>
+  • disciplina extrema<br>
+  • dieta chata<br>
+  • zero vida social<br><br>
+  <em>Brincadeira. Aqui é constância, não milagre.</em>
+`;
   `;
   document.body.appendChild(toast);
   requestAnimationFrame(() => toast.classList.add('show'));
