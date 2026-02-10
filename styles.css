@@ -435,3 +435,48 @@ body::before {
   from { transform: translateY(0); }
   to { transform: translateY(-40px); }
 }
+
+
+/* =====================
+   EASTER EGG — LAB MODE
+===================== */
+
+body.lab-mode {
+  --accent-purple: #22c55e;
+  --accent-cyan: #4ade80;
+}
+
+body.lab-mode .card {
+  box-shadow:
+    0 0 40px rgba(34,197,94,.45),
+    var(--shadow-soft);
+}
+
+.lab-toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: rgba(20,20,30,.95);
+  color: #fff;
+  padding: 16px 22px;
+  border-radius: 18px;
+  font-size: .9rem;
+  line-height: 1.4;
+  box-shadow: 0 20px 40px rgba(0,0,0,.4);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 2000;
+}
+
+.lab-toast.show {
+  animation: toastInOut 4.5s ease forwards;
+}
+
+@keyframes toastInOut {
+  0%   { opacity: 0; transform: translateX(-50%) translateY(20px); }
+  15%  { opacity: 1; transform: translateX(-50%) translateY(0); }
+  85%  { opacity: 1; }
+  100% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+}
+
