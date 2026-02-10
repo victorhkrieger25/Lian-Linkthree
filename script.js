@@ -126,17 +126,14 @@ const showLabToast = () => {
   setTimeout(() => toast.remove(), 4800);
 };
 
-// ATIVA LAB MODE
-const activateLabMode = () => {
-  if (labActive) return;
-  labActive = true;
+// ATIVA O VERDE PRIMEIRO
+document.body.classList.add('lab-mode');
 
-  // GLITCH VISUAL
-  document.body.classList.add('lab-glitch');
-  setTimeout(() => {
-    document.body.classList.remove('lab-glitch');
-  }, 500);
-
+// GLITCH POR CIMA DO VERDE
+document.body.classList.add('lab-glitch');
+setTimeout(() => {
+  document.body.classList.remove('lab-glitch');
+}, 600);
   // FEEDBACK TÁTIL (MOBILE)
   navigator.vibrate?.([60, 40, 60]);
 
