@@ -16,6 +16,25 @@
   --shadow-glow: 0 0 40px rgba(124,58,237,.18);
 }
 
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overscroll-behavior: none;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -10%;
+  background:
+    radial-gradient(circle at 20% 30%, rgba(124,58,237,.18), transparent 45%),
+    radial-gradient(circle at 80% 70%, rgba(34,211,238,.15), transparent 45%);
+  z-index: -1;
+  pointer-events: none;
+  animation: bgMove 14s ease-in-out infinite alternate;
+}
+
 /* DARK MODE */
 body.dark {
   --bg-main:
