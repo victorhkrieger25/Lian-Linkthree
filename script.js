@@ -1,3 +1,10 @@
+const getGlowColor = () => {
+  return document.body.classList.contains('lab-mode')
+    ? 'rgba(34,197,94,0.75)'   // VERDE LAB 🧪
+    : 'rgba(124,58,237,0.45)'; // ROXO NORMAL
+};
+
+
 // =====================
 // CONFIG GLOBAL
 // =====================
@@ -72,7 +79,7 @@ if (hero && !prefersReducedMotion) {
 }
 
 // =====================
-// GLOW REAGE AO SCROLL (RESPEITA TEMA)
+// GLOW REAGE AO SCROLL (COR DINÂMICA)
 // =====================
 if (!prefersReducedMotion) {
   window.addEventListener('scroll', () => {
@@ -82,7 +89,7 @@ if (!prefersReducedMotion) {
 
       card.style.boxShadow = `
         0 20px 40px rgba(0,0,0,.35),
-        0 0 ${30 + visible * 40}px var(--accent-purple)
+        0 0 ${30 + visible * 40}px ${getGlowColor()}
       `;
     });
   });
