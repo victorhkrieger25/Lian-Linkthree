@@ -144,7 +144,6 @@ main {
 }
 
 .bio-list {
-  margin-bottom: 24px;
   margin-top: 18px;
   list-style: none;
   display: flex;
@@ -161,6 +160,40 @@ main {
   background: var(--bg-card);
   font-size: .85rem;
   box-shadow: var(--shadow-soft);
+}
+
+.scroll-hint {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  font-size: .9rem;
+  color: var(--text-muted);
+  opacity: 0;
+
+  animation:
+    hintIn .9s ease forwards 1.2s,
+    hintFloat 2.4s ease-in-out infinite;
+}
+
+/* Entrada */
+@keyframes hintIn {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+  to {
+    opacity: .65;
+    transform: translateY(0);
+  }
+}
+
+/* Flutuação */
+@keyframes hintFloat {
+  50% {
+    transform: translateY(6px);
+  }
 }
 
 /* =====================
