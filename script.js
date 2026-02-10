@@ -3,11 +3,11 @@
 // =====================
 const getGlowColor = () =>
   document.body.classList.contains('lab-mode')
-    ? 'rgba(34,197,94,0.75)'
-    : 'rgba(124,58,237,0.45)';
+    ? 'rgba(34,197,94,0.75)'   // VERDE LAB 🧪
+    : 'rgba(124,58,237,0.45)'; // ROXO NORMAL
 
 // =====================
-// CONFIG
+// CONFIG GLOBAL
 // =====================
 const body = document.body;
 const toggle = document.getElementById('themeToggle');
@@ -16,7 +16,7 @@ const prefersReducedMotion = window.matchMedia(
 ).matches;
 
 // =====================
-// TEMA
+// TEMA (SISTEMA + MANUAL)
 // =====================
 if (toggle) {
   const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -40,13 +40,13 @@ if (toggle) {
         { transform: 'scale(.85)' },
         { transform: 'scale(1)' }
       ],
-      { duration: 220 }
+      { duration: 220, easing: 'ease-out' }
     );
   });
 }
 
 // =====================
-// REVEAL (CSS MANDA)
+// REVEAL DIRECIONAL
 // =====================
 const reveals = document.querySelectorAll('.reveal');
 
@@ -71,7 +71,7 @@ if (!prefersReducedMotion) {
 }
 
 // =====================
-// PARALLAX HERO (LEVE)
+// PARALLAX SUAVE NO HERO
 // =====================
 const hero = document.querySelector('.hero');
 
@@ -102,7 +102,7 @@ if (!prefersReducedMotion) {
 }
 
 // =====================
-// TIMELINE PROGRESS
+// TIMELINE PROGRESSIVA
 // =====================
 const timeline = document.querySelector('.timeline');
 
@@ -118,46 +118,53 @@ if (timeline && !prefersReducedMotion) {
 }
 
 // =====================
-// LAB MODE (EASTER EGG)
+// LAB MODE — EASTER EGG 🧪
 // =====================
 let labActive = false;
 let keyTimer = null;
 
+// TOAST
 const showLabToast = () => {
   const toast = document.createElement('div');
   toast.className = 'lab-toast';
   toast.innerHTML = `
     <strong>🧪 Modo laboratório ativado</strong><br>
-    toast.innerHTML = `
-  <strong>🧪 Modo laboratório ativado</strong><br>
-  Resultados podem incluir:<br>
-  • disciplina extrema<br>
-  • dieta chata<br>
-  • zero vida social<br><br>
-  <em>Brincadeira. Aqui é constância, não milagre.</em>
-`;
+    Resultados podem incluir:<br>
+    • disciplina extrema<br>
+    • dieta chata<br>
+    • zero vida social<br><br>
+    <em>Brincadeira. Aqui é constância, não milagre.</em>
   `;
   document.body.appendChild(toast);
+
   requestAnimationFrame(() => toast.classList.add('show'));
   setTimeout(() => toast.remove(), 4500);
 };
 
+// ATIVA LAB MODE
 const activateLabMode = () => {
   if (labActive) return;
   labActive = true;
 
-  body.classList.add('lab-mode', 'lab-glitch');
+  // ATIVA VERDE
+  body.classList.add('lab-mode');
+
+  // GLITCH
+  body.classList.add('lab-glitch');
+  setTimeout(() => body.classList.remove('lab-glitch'), 600);
+
+  // FEEDBACK MOBILE
   navigator.vibrate?.([60, 40, 60]);
+
   showLabToast();
 
-  setTimeout(() => body.classList.remove('lab-glitch'), 600);
   setTimeout(() => {
     body.classList.remove('lab-mode');
     labActive = false;
   }, 6000);
 };
 
-// DESKTOP — segurar L
+// DESKTOP — SEGURAR "L"
 document.addEventListener('keydown', e => {
   if (e.key.toLowerCase() === 'l' && !keyTimer) {
     keyTimer = setTimeout(activateLabMode, 2000);
@@ -171,7 +178,7 @@ document.addEventListener('keyup', e => {
   }
 });
 
-// MOBILE — 3 taps no avatar
+// MOBILE — 3 TAPS NO AVATAR
 const avatar = document.querySelector('.avatar');
 let tapCount = 0;
 let tapTimer = null;
