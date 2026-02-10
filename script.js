@@ -95,3 +95,82 @@ if (timeline && !prefersReducedMotion) {
     timeline.style.setProperty('--progress', `${progress * 100}%`);
   });
 }
+
+
+// =====================
+// EASTER EGG — LAB MODE
+// =====================
+
+let labActive = false;
+let keyTimer = null;
+
+// Toast
+const showLabToast = () => {
+  const toast = document.createElement('div');
+  toast.className = 'lab-toast';
+  toast.innerHTML = `
+    <strong>🧪 Modo laboratório ativado</strong><br>
+    Resultados podem incluir:<br>
+    • disciplina extrema<br>
+    • dieta chata<br>
+    • zero vida social<br><br>
+    <em>Brincadeira. Aqui é constância, não milagre.</em>
+  `;
+  document.body.appendChild(toast);
+
+  requestAnimationFrame(() => toast.classList.add('show'));
+
+  setTimeout(() => {
+    toast.remove();
+  }, 4800);
+};
+
+// Ativar modo
+const activateLabMode = () => {
+  if (labActive) return;
+  labActive = true;
+
+  document.body.classList.add('lab-mode');
+  showLabToast();
+
+  setTimeout(() => {
+    document.body.classList.remove('lab-mode');
+    labActive = false;
+  }, 6000);
+};
+
+// DESKTOP — segurar L
+document.addEventListener('keydown', e => {
+  if (e.key.toLowerCase() === 'l' && !keyTimer) {
+    keyTimer = setTimeout(activateLabMode, 2000);
+  }
+});
+
+document.addEventListener('keyup', e => {
+  if (e.key.toLowerCase() === 'l') {
+    clearTimeout(keyTimer);
+    keyTimer = null;
+  }
+});
+
+// MOBILE — 3 taps no avatar
+const avatar = document.querySelector('.avatar');
+let tapCount = 0;
+let tapTimer = null;
+
+if (avatar) {
+  avatar.addEventListener('click', () => {
+    tapCount++;
+    clearTimeout(tapTimer);
+
+    tapTimer = setTimeout(() => (tapCount = 0), 600);
+
+    if (tapCount === 3) {
+      activateLabMode();
+      tapCount = 0;
+    }
+  });
+}
+
+
+
