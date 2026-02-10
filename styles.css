@@ -440,3 +440,34 @@ main {
   }
 }
 
+.live-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.twitch-wrapper {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+  background: #000;
+}
+
+.live-status {
+  margin-top: 14px;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .twitch-wrapper {
+    max-width: 100%;
+  }
+}
+
+
