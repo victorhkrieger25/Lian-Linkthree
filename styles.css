@@ -470,4 +470,8 @@ main {
   }
 }
 
+.hero.reveal.active {
+  animation: heroFade 1.2s ease forwards;
+}
+
 
