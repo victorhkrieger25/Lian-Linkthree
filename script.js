@@ -1,22 +1,26 @@
+// =====================
+// GLOW DINÂMICO (ROXO / VERDE)
+// =====================
 const getGlowColor = () => {
   return document.body.classList.contains('lab-mode')
     ? 'rgba(34,197,94,0.75)'   // VERDE LAB 🧪
-    : 'rgba(124,58,237,0.45)'; // ROXO NORMAL
+    : 'rgba(124,58,237,0.45)'; // ROXO PADRÃO
 };
-
 
 // =====================
 // CONFIG GLOBAL
 // =====================
 const body = document.body;
 const toggle = document.getElementById('themeToggle');
-const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const prefersReducedMotion =
+  window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 // =====================
 // TEMA (SISTEMA + MANUAL)
 // =====================
 if (toggle) {
-  const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const systemDark =
+    window.matchMedia('(prefers-color-scheme: dark)').matches;
   const saved = localStorage.getItem('theme');
 
   const applyTheme = dark => {
@@ -43,7 +47,7 @@ if (toggle) {
 }
 
 // =====================
-// REVEAL DIRECIONAL
+// REVEAL DIRECIONAL (SCROLL)
 // =====================
 const reveals = document.querySelectorAll('.reveal');
 
@@ -79,13 +83,14 @@ if (hero && !prefersReducedMotion) {
 }
 
 // =====================
-// GLOW REAGE AO SCROLL (COR DINÂMICA)
+// GLOW REAGE AO SCROLL
 // =====================
 if (!prefersReducedMotion) {
   window.addEventListener('scroll', () => {
     document.querySelectorAll('.card').forEach(card => {
       const rect = card.getBoundingClientRect();
-      const visible = Math.max(0, 1 - Math.abs(rect.top) / window.innerHeight);
+      const visible =
+        Math.max(0, 1 - Math.abs(rect.top) / window.innerHeight);
 
       card.style.boxShadow = `
         0 20px 40px rgba(0,0,0,.35),
@@ -135,23 +140,21 @@ const showLabToast = () => {
   setTimeout(() => toast.remove(), 4800);
 };
 
-// ATIVA LAB MODE (VERDE PRIMEIRO)
+// ATIVAR LAB MODE
 const activateLabMode = () => {
   if (labActive) return;
   labActive = true;
 
-  // 👉 ATIVA O VERDE PRIMEIRO
+  // VERDE PRIMEIRO
   document.body.classList.add('lab-mode');
 
-  // GLITCH SOBRE O VERDE
+  // GLITCH
   document.body.classList.add('lab-glitch');
   setTimeout(() => {
     document.body.classList.remove('lab-glitch');
   }, 600);
 
-  // FEEDBACK MOBILE
   navigator.vibrate?.([60, 40, 60]);
-
   showLabToast();
 
   setTimeout(() => {
@@ -194,30 +197,23 @@ if (avatar) {
 }
 
 // =====================
-// ANIMAÇÃO DE ENTRADA
+// ANIMAÇÃO DE ENTRADA (APENAS HERO)
 // =====================
 window.addEventListener('load', () => {
-  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  if (prefersReducedMotion) return;
 
   const hero = document.querySelector('.hero');
-  const heroItems = hero
-    ? hero.querySelectorAll('img, h1, .subtitle, .bio-list li, .scroll-hint')
-    : [];
+  if (!hero) return;
 
-  const sections = document.querySelectorAll('section:not(.hero)');
+  const heroItems = hero.querySelectorAll(
+    'img, h1, .subtitle, .bio-list li, .scroll-hint'
+  );
 
-  // Estado inicial (JS controla tudo)
   heroItems.forEach(el => {
     el.style.opacity = 0;
     el.style.transform = 'translateY(20px)';
   });
 
-  sections.forEach(sec => {
-    sec.style.opacity = 0;
-    sec.style.transform = 'translateY(40px)';
-  });
-
-  // HERO — entrada em cascata
   heroItems.forEach((el, i) => {
     setTimeout(() => {
       el.animate(
@@ -233,24 +229,4 @@ window.addEventListener('load', () => {
       );
     }, 200 + i * 120);
   });
-
-  // SEÇÕES — delay geral depois do hero
-  setTimeout(() => {
-    sections.forEach((sec, i) => {
-      sec.animate(
-        [
-          { opacity: 0, transform: 'translateY(40px)' },
-          { opacity: 1, transform: 'translateY(0)' }
-        ],
-        {
-          duration: 700,
-          delay: i * 120,
-          easing: 'cubic-bezier(.22,1,.36,1)',
-          fill: 'forwards'
-        }
-      );
-    });
-  }, 1200);
 });
-
-
