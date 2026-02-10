@@ -192,3 +192,65 @@ if (avatar) {
     }
   });
 }
+
+// =====================
+// ANIMAÇÃO DE ENTRADA
+// =====================
+window.addEventListener('load', () => {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const hero = document.querySelector('.hero');
+  const heroItems = hero
+    ? hero.querySelectorAll('img, h1, .subtitle, .bio-list li, .scroll-hint')
+    : [];
+
+  const sections = document.querySelectorAll('section:not(.hero)');
+
+  // Estado inicial (JS controla tudo)
+  heroItems.forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+  });
+
+  sections.forEach(sec => {
+    sec.style.opacity = 0;
+    sec.style.transform = 'translateY(40px)';
+  });
+
+  // HERO — entrada em cascata
+  heroItems.forEach((el, i) => {
+    setTimeout(() => {
+      el.animate(
+        [
+          { opacity: 0, transform: 'translateY(20px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ],
+        {
+          duration: 600,
+          easing: 'cubic-bezier(.22,1,.36,1)',
+          fill: 'forwards'
+        }
+      );
+    }, 200 + i * 120);
+  });
+
+  // SEÇÕES — delay geral depois do hero
+  setTimeout(() => {
+    sections.forEach((sec, i) => {
+      sec.animate(
+        [
+          { opacity: 0, transform: 'translateY(40px)' },
+          { opacity: 1, transform: 'translateY(0)' }
+        ],
+        {
+          duration: 700,
+          delay: i * 120,
+          easing: 'cubic-bezier(.22,1,.36,1)',
+          fill: 'forwards'
+        }
+      );
+    });
+  }, 1200);
+});
+
+
