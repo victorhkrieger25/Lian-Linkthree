@@ -16,27 +16,29 @@
   --shadow-glow: 0 0 40px rgba(124,58,237,.18);
 }
 
-html {
+/* =====================
+   CONTROLE DE SCROLL MOBILE
+===================== */
+html, body {
   width: 100%;
   max-width: 100%;
   overflow-x: hidden;
 }
 
 body {
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
   overflow-y: auto;
   overscroll-behavior-x: none;
 }
 
+/* =====================
+   TEXTURA METAL
+===================== */
 body::after {
   content: "";
   position: fixed;
   inset: 0;
   pointer-events: none;
-  z-index: -1;
-
+  z-index: -2;
   background-image: url("img/metal-texture.jpg");
   background-size: cover;
   background-position: center;
@@ -44,7 +46,9 @@ body::after {
   mix-blend-mode: overlay;
 }
 
-
+/* =====================
+   FUNDO VIVO (ÚNICO)
+===================== */
 body::before {
   content: "";
   position: fixed;
@@ -57,7 +61,14 @@ body::before {
   animation: bgMove 14s ease-in-out infinite alternate;
 }
 
-/* DARK MODE */
+@keyframes bgMove {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-40px); }
+}
+
+/* =====================
+   DARK MODE
+===================== */
 body.dark {
   --bg-main:
     radial-gradient(circle at 20% 20%, #7c3aed55, transparent 40%),
@@ -75,7 +86,7 @@ body.dark {
 }
 
 /* =====================
-   RESET / BASE
+   RESET
 ===================== */
 * {
   margin: 0;
@@ -91,24 +102,6 @@ body {
   color: var(--text-main);
   min-height: 100vh;
   transition: background .4s ease, color .4s ease;
-  overflow-x: hidden;
-}
-
-/* FUNDO VIVO */
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-  background:
-    radial-gradient(circle at 20% 30%, rgba(124,58,237,.18), transparent 45%),
-    radial-gradient(circle at 80% 70%, rgba(34,211,238,.15), transparent 45%);
-  z-index: -1;
-  animation: bgMove 14s ease-in-out infinite alternate;
-}
-
-@keyframes bgMove {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-40px); }
 }
 
 /* =====================
@@ -127,6 +120,9 @@ main {
 .hero {
   text-align: center;
   margin-bottom: 72px;
+}
+
+.hero.reveal.active {
   animation: heroFade 1.2s ease forwards;
 }
 
@@ -203,38 +199,29 @@ main {
   box-shadow: var(--shadow-soft);
 }
 
+/* =====================
+   SCROLL HINT
+===================== */
 .scroll-hint {
   margin-top: 22px;
   display: inline-flex;
   align-items: center;
   gap: 8px;
-
   font-size: .9rem;
   color: var(--text-muted);
   opacity: 0;
-
   animation:
     hintIn .9s ease forwards 1.2s,
     hintFloat 2.4s ease-in-out infinite;
 }
 
-/* Entrada */
 @keyframes hintIn {
-  from {
-    opacity: 0;
-    transform: translateY(-6px);
-  }
-  to {
-    opacity: .65;
-    transform: translateY(0);
-  }
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: .65; transform: translateY(0); }
 }
 
-/* Flutuação */
 @keyframes hintFloat {
-  50% {
-    transform: translateY(6px);
-  }
+  50% { transform: translateY(6px); }
 }
 
 /* =====================
@@ -295,7 +282,9 @@ main {
   color: var(--text-muted);
 }
 
-/* CUPOM */
+/* =====================
+   CUPOM
+===================== */
 .card.coupon {
   padding-right: 80px;
   overflow: hidden;
@@ -314,6 +303,17 @@ main {
   letter-spacing: .08em;
   transform: rotate(45deg);
   box-shadow: 0 0 25px rgba(124,58,237,.5);
+}
+
+/* Animação extra do cupom */
+.card.coupon.reveal.active {
+  animation: cupomHighlight 1.4s ease-out forwards;
+}
+
+@keyframes cupomHighlight {
+  0%   { box-shadow: var(--shadow-soft); transform: scale(1); }
+  40%  { box-shadow: 0 0 45px rgba(34,197,94,.55); transform: scale(1.04); }
+  100% { box-shadow: var(--shadow-soft); transform: scale(1); }
 }
 
 /* =====================
@@ -396,6 +396,32 @@ main {
 }
 
 /* =====================
+   LIVE
+===================== */
+.live-section {
+  margin-top: 80px;
+  text-align: center;
+}
+
+.twitch-wrapper {
+  margin-top: 24px;
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  margin-inline: auto;
+  border-radius: 22px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft), var(--shadow-glow);
+  background: #000;
+}
+
+.live-status {
+  margin-top: 14px;
+  font-size: .9rem;
+  color: var(--text-muted);
+}
+
+/* =====================
    DESKTOP
 ===================== */
 @media (min-width: 900px) {
@@ -417,7 +443,16 @@ main {
 }
 
 /* =====================
-   EASTER EGG — LAB MODE
+   MOBILE
+===================== */
+@media (max-width: 600px) {
+  .twitch-wrapper {
+    max-width: 100%;
+  }
+}
+
+/* =====================
+   LAB MODE
 ===================== */
 .lab-toast {
   position: fixed;
@@ -446,99 +481,15 @@ main {
   100% { opacity: 0; transform: translate(-50%, 20px); }
 }
 
-/* =====================
-   GLITCH — LAB MODE
-===================== */
-
 .lab-glitch {
   animation: glitchFlash 0.25s linear 2;
 }
 
 @keyframes glitchFlash {
-  0% {
-    filter: none;
-    transform: translate(0);
-  }
-  20% {
-    filter: hue-rotate(30deg) contrast(1.3);
-    transform: translate(-2px, 1px);
-  }
-  40% {
-    filter: hue-rotate(-30deg) contrast(1.4);
-    transform: translate(2px, -1px);
-  }
-  60% {
-    filter: hue-rotate(20deg) contrast(1.2);
-    transform: translate(-1px, -1px);
-  }
-  80% {
-    filter: hue-rotate(-20deg) contrast(1.3);
-    transform: translate(1px, 1px);
-  }
-  100% {
-    filter: none;
-    transform: translate(0);
-  }
+  0%   { filter: none; transform: translate(0); }
+  20%  { filter: hue-rotate(30deg) contrast(1.3); transform: translate(-2px, 1px); }
+  40%  { filter: hue-rotate(-30deg) contrast(1.4); transform: translate(2px, -1px); }
+  60%  { filter: hue-rotate(20deg) contrast(1.2); transform: translate(-1px, -1px); }
+  80%  { filter: hue-rotate(-20deg) contrast(1.3); transform: translate(1px, 1px); }
+  100% { filter: none; transform: translate(0); }
 }
-
-.live-section {
-  margin-top: 80px;
-  text-align: center;
-}
-
-.twitch-wrapper {
-  margin-top: 24px;
-  width: 100%;
-  max-width: 900px;
-  aspect-ratio: 16 / 9;
-  margin-inline: auto;
-  border-radius: 22px;
-  overflow: hidden;
-  box-shadow: var(--shadow-soft), var(--shadow-glow);
-  background: #000;
-}
-
-.live-status {
-  margin-top: 14px;
-  font-size: .9rem;
-  color: var(--text-muted);
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-  .twitch-wrapper {
-    max-width: 100%;
-  }
-}
-
-.hero.reveal.active {
-  animation: heroFade 1.2s ease forwards;
-}
-
-
-/* =====================
-   CUPOM — ANIMAÇÃO EXTRA
-===================== */
-
-.card-cupom.reveal.active {
-  animation: cupomHighlight 1.4s ease-out forwards;
-}
-
-@keyframes cupomHighlight {
-  0% {
-    box-shadow: var(--shadow-soft);
-    transform: scale(1);
-  }
-
-  40% {
-    box-shadow: 0 0 45px rgba(34,197,94,.55);
-    transform: scale(1.04);
-  }
-
-  100% {
-    box-shadow: var(--shadow-soft);
-    transform: scale(1);
-  }
-}
-
-
